@@ -25,7 +25,7 @@ class Solution(object):
         while start<end: 
             nums[start], nums[end]=nums[end], nums[start]
             start+=1
-            end-=
+            end-=1
 
 #or: 
         n = len(nums)
