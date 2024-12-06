@@ -1,0 +1,410 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{dirtytalk}
+\usepackage[autostyle]{csquotes}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\DeclareMathOperator{\min}{min}
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\makeatother
+\title{\normalfont\notesize\textbf{Chapter 4}}
+\author{Jonathan Kong}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Principle of Inclusion and Exclusion}
+\begin{tcolorbox}
+\textbf{Problem 4.1} Among a large group of students at a high school, fifty of them take Calculus, thirty take Physics, and eight take both courses. If every student in the group takes at least one of the two classes, how large is the group? 
+\end{tcolorbox}
+\noindent 
+If we were to add the number of students who take Calculus with the number of students who take Physics, we are counting the number of students who take both courses twice. They are counted once alongside the Calculus students and another time alongside the Physics students. Therefore, to compensate for this over counting, we subtract the number of students taking both courses, ensuring that each student is counted exactly once: 
+$$50+30-8=72$$
+The method of adding and subtracting groups to ensure everything is counted once is known as the principle of inclusion and exclusion. We use this method when counting a \textbf{union} of at least two sets.[EXPLAIN SET] For two sets $A$ and $B$, the union, denoted as $A \cup B$, is the set of elements that are in $A$ or $B$ (or both). The \textbf{intersection} between two sets $A$ and $B$, denoted as $A \cap B$, is the set of elements that are in both $A$ and $B$. \\
+\\
+\noindent 
+In this problem, we counted the union between students who take Calculus and students who take Physics. To compensate for over counting, we subtracted the intersection between the two groups. \\
+\\
+\noindent
+We can put this result for two sets in general form. For two finite sets $A$ and $B$, 
+$${A \cup B}=A+B-{A \cap B}$$
+\noindent 
+[EXPLAIN NAME OF PIE] The summing of the two sets is the \textbf{inclusion} portion while the subtracting of the intersection is the \textbf{exclusion} portion.\\
+\\
+\noindent 
+[EXPLANATION OF WHAT TYPE OF COUNTING PROBLEMS PIE IS USED FOR (more than one condition, union of two conditions, AT LEAST ONE... type problems, etc, and lead into next problem]
+ \\
+\begin{tcolorbox}
+\textbf{Problem 4.2} How many positive integers less than or equal to 100 are divisible by 2 or 3?
+\end{tcolorbox}
+\noindent 
+We are asked for the number of integers less than or equal to 100 divisible by 2 \textit{or} 3, which is a union of two sets. This is our indication for using PIE. Let $A_2$ be the set of integers less than or equal to 100 divisible by 2 and $A_3$ be the set of integers less than or equal to 100 divisible by 3. The set of integers less than or equal to 100 divisible by 2 or 3 is $A_2 \cup A_3$. $A_2 \cap A_3$ is the set of integers less than or equal to 100 divisible by 2 \textit{and} 3, or integers that are divisible by 6. \\
+\\
+\noindent 
+We can compute $A_2 \cup A_3$ using PIE:
+\begin{align*}
+{A_2 \cup A_3} &={A_2}+{A_3}-{A_2 \cap A_3} \\
+               &=  \floor*{\frac{100}{2}}+ \floor*{\frac{100}{3}}- \floor*{\frac{100}{6}} \\
+               &= 50+33-16 \\
+               &= 67
+\end{align*}
+\noindent 
+The $\floor*{}$ denotes the floor function,  which serves to output the greatest integer  less than or equal to the input value. [LEFT OFF HERE]
+\begin{tcolorbox}
+\textbf{Problem 4.3} At a concert consisting of 500 fans, the performer gave every 5th fan an autograph and every 50th fan a hug. How many fans interacted with the performer during the concert?
+\end{tcolorbox}
+\noindent 
+Fans who interacted with the performer were given an autograph or a hug (or both). This is a union of two sets and we can proceed using PIE. Let $A$ be the set of fans given an autograph and $H$ be the set of fans given a hug. The number of fans who interacted with the performer is therefore: 
+\begin{align*}
+{A \cup H} &= A + H -{A \cap H} \\
+           &= \floor*{\frac{500}{5}}+\floor*{\frac{500}{50}}-\floor*{\frac{500}{250}} \\
+           &= 100+10-2 \\
+           &= 108
+\end{align*}
+\noindent 
+Many PIE problems such as these are very easy to solve since the union that needs to be counted is very easy to make out. The word \textit{or} is mostly always a sign that a union is being counted and that PIE is a good option. The next problem is one that can be solved using basic counting techniques we have already looked at; however, now that we have PIE under our belt, we can reach a solution much faster. 
+\begin{tcolorbox}
+\textbf{Problem 4.4} How many 3-digit integers are divisible by 3 or end in a 7? 
+\end{tcolorbox}
+\noindent 
+The word \textit{or} indicates a union of two sets is being counted, so we proceed using PIE. \\
+\\
+\noindent
+Let $A$ be the set of 3-digit integers divisible by 3 and $B$ be the set of 3-digit integers that end in a 7. \\
+\\
+\noindent
+Integers in $A$ have nine choices for their first digit, ten choices for their second digit, and one choice for their last digit, so there are $9 \times 10 \times 1=90$ elements in $A$. \\
+\\
+\noindent 
+There are $9 \times 10^2=900$ three digit integers, so $B$ contains $\floor*{\frac{9 \times 10^2}{3}}=300$ elements. \\
+\\
+\noindent 
+We now count the number of 3-digit integers that are both divisible by 3 and end in a 7. Recall that the divisibility rule for 3 is that the sum of the digits must be divisible by 3. Therefore, the elements of $A \cap B$ are 3-digit integers that end in 7 and have a sum of digits divisible by 3. If the first digit is 1, the second digit can be 1, 4, or 7 to make the sum of digits divisible by 3. If the first digit is 2, the second digit can be 0, 3, 6, or 9. We continue in this manner of casework to find that there are 30 such integers and so $A \cap B=30$. \\
+\\
+\noindent 
+PIE yields:
+\begin{align*}
+{A \cup B} &={A} + {B} -{A \cap B} \\
+           &=90+300-30 \\
+           &=360
+\end{align*}
+\noindent 
+As you have most likely suspected, PIE is not limited to just two sets. In the next problem, we will count the union between three sets and then use the result to establish a general PIE method. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 4.6} At a high school, 45 people play basketball, 33 play baseball, and 25 play football. 10 people play both basketball and baseball, 8 play both basketball and football, and 7 play both baseball and football. Finally, 4 people play all three sports. How many people play sports at this high school?
+\end{tcolorbox}
+\noindent 
+We are given the number of elements in each of the three sets, each of the intersections between two sets, and the intersection between all three sets. With this information, and can we find the union of the three sets? \\
+\\
+\noindent
+A reasonable first step is to add the elements of the single sets: 
+$$45+33+25=103$$
+\noindent
+However, this over counts students who play two sports one time, so we subtract all intersections between two sets: 
+$$45+33+25-10-8-7=78$$
+\noindent
+We are not done however, since we haven't yet dealt with the students who play all three sports. When we added the elements of the individual sets, we counted those who play all three sports three times. Then, when we subtracted intersections of two sets, we subtracted those who play all three sports three times, once in each intersection. Therefore, we have counted them zero times and so we need to add the intersection of three sets once. Our final answer is then 
+$$45+33+25-10-8-7+4=82$$
+\noindent 
+We just solved the basic three-set PIE problem. This result can be put into general form as follows: \\
+\\
+\noindent 
+Let $A$, $B$, and $C$ be finite sets. Then 
+$${A \cup B \cup C}=A+B+C-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C}$$
+\noindent 
+As we did with two sets, we will begin with a few simple problems. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 4.7} How many positive integers less than or equal to 500 are divisible by 2, 3, or 7?
+\end{tcolorbox}
+\noindent 
+Here, we are asked to find a union between three sets so we can proceed using PIE. \\
+\\
+\noindent
+We let $A$ be the set of integers less than or equal to 500 divisible by 2, $B$ be the set of integers less than or equal to 500 divisible by 3, and $C$ be the set of integers less than or equal to 500 divisible by 7. We have that 
+$$A={\floor*{\frac{500}{2}}}=250$$
+$$B={\floor*{\frac{500}{3}}}=166$$
+$$C= \floor*{\frac{500}{7}}=71$$
+For intersections of two sets, we look at the number of integers less than or equal to 500 divisible by two integers in 2, 3, and 7: 
+$$A \cap B={ \floor*{\frac{500}{2 \times 3}}}=83$$
+$$A \cap C={ \floor*{\frac{500}{2 \times 7}}}=35$$
+$$B \cap C={ \floor*{\frac{500}{3 \times 7}}}=23$$
+Lastly, the intersection of all three sets consists of the integers less than or equal to 500 divisible by 2, 3, and 7: 
+$$ {A \cap B \cap C}={\floor*{\frac{500}{2 \times 3 \times 7}}=11}$$
+PIE yields: 
+\begin{align*}
+    A \cup B \cup C &={A}+{B}+{C}-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C} \\
+                    &={250+166+71-83-35-23+11} \\
+                    &=357
+\end{align*}
+\noindent 
+
+\begin{tcolorbox}
+\textbf{Problem 4.8} Mrs. Sanders has three grandchildren, who call her regularly. One calls her every three days, one calls her every four days, and one calls her every five days. All three called her on December 31, 2016. On how many days during the next year did she not receive a phone call from any of her grandchildren? (Source: AMC)
+\end{tcolorbox}
+\noindent 
+Note that we are asked to count the number of days Mrs. Sanders \textit{did not} receive a phone call. With the given information, we know that we can use PIE to count the number of days she \textit{did} receive a phone call. We can then use complementary counting to subtract this number of days from the total number days in the year, which is 365. \\
+\\
+\noindent 
+Let $A$, $B$, and $C$ be the sets of number of days where Mrs. Sanders receives a phone call from the grandson who calls her every three days, the one who calls her every four days, and the one who calls her every five days, respectively.\\
+\\
+\noindent
+Using PIE, we count the union of the three sets, which gives the number of days Mrs. Sanders did receive a phone call:  
+\begin{align*}
+    {A \cup B \cup C } &={A}+{B}+{C}-{A \cup B}-{A \cup C}-{B \cup C}+{A \cup B \cup C} \\
+                       &= { \floor*{\frac{365}{3}}}+{ \floor*{\frac{365}{4}}}+\floor*{\frac{365}{5}}-\floor*{\frac{365}{3 \times 4}}-\floor*{\frac{365}{3 \times 5}}-\floor*{\frac{365}{4 \times 5}}+\floor*{\frac{365}{3 \times 4 \times 5}} \\
+                       &= 121+91+73-30-24-18+6 \\
+                       &=219
+\end{align*}
+Therefore, the number of days Mrs. Sanders did not receive a phone call is 
+$$365-219=146$$
+\noindent 
+Using complementary counting with PIE is very common. When it is not possible to directly count something, you can usually count the complement using PIE. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 4.9} Vernonia High School has 85 seniors, each of whom plays on at least one of the school’s
+three varsity sports teams: football, baseball, and lacrosse. It so happens that 74 are
+on the football team; 26 are on the baseball team; 17 are on both the football and
+lacrosse teams; 18 are on both the baseball and football teams; and 13 are on both the
+baseball and lacrosse teams. Compute the number of seniors playing all three sports,
+given that twice this number are members of the lacrosse team. (Source: HMMT)
+\end{tcolorbox}
+\noindent 
+Note that we are given the total number of seniors, which is a union. We are asked to find the number of seniors playing all three sports, which is an intersection of three sets. Let this number be $x$; $2x$ is then the number of members on the lacrosse team. All additional set information is given. \\
+\\
+\noindent 
+Using PIE gives an equation that we can solve for $x$: 
+$$85=74+26+2x-17-18-13+x$$
+$$x=11$$ 
+\noindent 
+Therefore, 11 seniors play all three sports. \\
+\\
+\noindent 
+We will next look at a few PIE problems involving permutations and letter arrangements. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 4.10} How many arrangements of the English alphabet do not contain any one of the words BRAVE or WINGS?
+\end{tcolorbox}
+\noindent 
+This is a two-set PIE problem. \\
+\\
+\noindent 
+Let $A$ be the set of arrangements that contain BRAVE and $B$ be the set of arrangements that contain WINGS. \\
+\\
+\noindent 
+To count the number of elements in $A$, we can treat BRAVE as a single letter-block where any arrangement with this block represents a mirrored arrangement with BRAVE in its place. There are 21 other letters in the alphabet, and along with this block, there are a total off 22 items that can be rearranged. Therefore, there are $22!$ elements in $A$. \\
+\\
+\noindent 
+The exact same letter-block method can be applied to set $B$ and since WINGS is also a five-letter word, $B$ also contains $22!$ elements. \\
+\\
+\noindent 
+To count $A \cap B$, we first note that there are no shared letters between the two words. Therefore, we can treat both words as individual single-letter blocks. There are 16 other letters in the alphabet, and along with these two blocks, there are a total of 18 items that can be rearranged. Therefore, there are $18!$ elements in $A \cap B$. \\
+\\
+\noindent 
+PIE yields 
+\begin{align*}
+    {A \cup B} &={A}+{B}-{A \cap B} \\
+               &= 2(22!)-18! 
+\end{align*}
+\noindent 
+\begin{tcolorbox}
+\textbf{Problem 4.11} How many arrangements of the English alphabet do not contain any one of the words BROWN, FUDGE, or VITAL?
+\end{tcolorbox}
+\noindent 
+We can use PIE to count the complement. \\
+\\
+\noindent
+Let $A$, $B$, and $C$ be the set of arrangements that contain BROWN, FUDGE, and VITAL, respectively. If we treat each word as a single-letter block, we get that 
+$$A=B=C=22!$$
+\noindent 
+Note that no letter is shared between any two words. Therefore, when we there are two or three words in the arrangement, we can treat each as single-letter blocks. \\
+\\
+\noindent
+Set-pair intersections contain two blocks, so 
+$${A \cap B}={A \cap C}={B \cap C}=18!$$
+The intersection of all three sets contains three blocks, so
+$${A \cap B \cap C}=14!$$
+\noindent 
+PIE yields 
+\begin{align*}
+    {A \cup B \cup C} &={A}+{B}+{C}-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C} \\
+                      &=3(22!)-3(18!)+14!
+\end{align*}
+\noindent 
+There are a total of $26!$ arrangements of the English alphabet, so our answer is 
+$$26!-3(22!)+3(18!)-14!$$
+\noindent 
+[LEFT OFF HERE]
+\begin{tcolorbox}
+\textbf{Problem 4.12} How many arrangements of the letters in the word MATHEMATICS have no two consecutive letters? 
+\end{tcolorbox}
+\noindent 
+The total number of arrangements in the word is $\frac{11!}{2!2!2!}$. Using PIE, we can count the number of arrangements with at least one set of consecutive letters and then subtract from the total number of arrangements. Let $A$, $B$, and $C$ be the set of arrangements that contain consecutive Ms, As, and Ts. Treat the pairs of letters as single blocks. We have that 
+$$A=B=C=\frac{10!}{2!2!}$$
+$${A \cap B}={A \cap C}={B \cap C}={\frac{9!}{2!}}$$
+$${A \cap B \cap C}=8!$$
+By PIE, we have that 
+\begin{align*}
+    {A \cup B \cup C} &={A}+{B}+{c}-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C} \\
+                      &=3(\frac{10!}{2!2!})-3(\frac{9!}{2!})+8!
+\end{align*}
+We subtract this from the total number of arrangements to get our answer: 
+$$\frac{11!}{2!2!2!}-3(\frac{10!}{2!2!})+3(\frac{9!}{2!})-8!=$$
+\begin{tcolorbox}
+\textbf{Problem 4.13} Find the number of positive integers that are divisors of at least one of $10^{10},15^7,18^{11}$. (Source: AIME) A number $n$ broken down into prime factors $n=p^aq^br^c...$ has $(a+1)(b+1)(c+1)...$ divisors. 
+\end{tcolorbox}
+\noindent 
+We start by prime factorizing: $10^{10}=2^{10} \cdot 5^{10}$, $15^7=3^7 \cdot 5^7$, and $18^{11}=2^{11} \cdot 3^{22}$. Therefore, $10^{10}$ has $11 \cdot 11=121$ divisors, $15^7$ has $8 \cdot 8=64$ divisors, and $18^{11}$ has $12 \cdot 23=276$ divisors. Because there are divisors that overlap, we must use PIE. Let $A$, $B$, and $C$ be the sets of positive integers that are divisors of $10^{10}$, $15^7$, and $18^{11}$, respectively. We already found $A$, $B$, and $C$, so lets find the intersection of pairs of sets. A number divides two numbers if it divides their greatest common common divisor. For $10^10=2^{10} \cdot 5^{10}$ and $15^7=3^7 \cdot 5^7$, the gcd is $5^7$. For $10^10=2^{10} \cdot 5^{10}$ and $18^{11}=2^{11} \cdot 3^{22}$, the gcd is $2^10$. For $15^7=3^7 \cdot 5^7$ and $18^{11}=2^{11} \cdot 3^{22}$, the gcd is $3^7$. Therefore, we have that ${A \cup B}=(7+1)=8$, ${A \cup C}=(10+1)=11$, and ${B \cup C}=(7+1)=8$. Finally, the gcd for $10^{10}=2^{10} \cdot 5^{10}$, $15^7=3^7 \cdot 5^7$, and $18^{11}=2^{11} \cdot 3^{22}$ is 1, so ${A \cup B \cup C}=1$. Finally, PIE gives that the number of positive integers divisible by at least one of $10^{10}$, $15^7$, $18^{11}$ is 
+\begin{align*}
+    {A \cup B \cup C} &=A+B+C-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C} \\
+                      &=121+64+276-8-11-8+1 \\
+                      &=435
+\end{align*}
+\begin{tcolorbox}
+\textbf{Problem 4.14} 3 representatives from each of the countries Germany, Spain, and France meet together and sit in a row of chairs. If at least one country must seat its 3 representatives together, how many possible arrangements of the representatives are there?
+\end{tcolorbox}
+\noindent
+Let $A$, $B$, and $C$ be the sets consisting of arrangements with 3 consecutive German representatives, 3 consecutive Spain representatives, and 3 consecutive France representatives, respectively. Treating 3 consecutive representatives as single blocks, we have that 
+$$A=B=C=7!$$
+$${A \cap B}={A \cap C}={B \cap C}=5!$$
+$${A \cap B \cap C}=3!$$
+By PIE, we have that 
+\begin{align*}
+    {A \cup B \cup C} &={A}+{B}+{C}-{A \cap B}-{A \cap C}-{B \cap C} \\
+                      &= 3(7!)-3(5!)+3! \\
+                      &= 14766
+\end{align*}
+\begin{tcolorbox}
+\textbf{Problem 4.15} Find the number of sequences of length 7 composed of 1s, 2s, 3s, and 4s such that 1, 2, and 3 all appear at least once.  
+\end{tcolorbox}
+\noindent 
+[FINISHED REVISE] We cannot use PIE to directly count the number of desired sequences. Instead, we note that the complement to our desired sequences are the sequences for which at least one of 1, 2, or 3 don't appear. This is an \say{at least} problem statement and so we can use PIE to find the number of these sequences. \\
+\\
+\noindent 
+Let $A$, $B$, and $C$ be the sets in which 1, 2, and 3 don't appear, respectively. For each sequence in these sets, there are 3 options for each of the 7 terms so: 
+$$A=B=C=3^7$$
+For intersection of pairs of sets, 2 numbers do not appear in the sequence, so there are 2 options for each of the 7 terms: 
+$${A \cap B}={A \cap C}={B \cap C}=2^7$$
+There is only one sequence where 1, 2, and 3 don't appear, which is the sequence with all 4s: 
+$${A \cap B \cap C}=1$$
+Therefore, the number of sequences with at least one of 1, 2, or 3 is: 
+\begin{align*}
+    {A \cup B \cup C} &={A}+{B}+{C}-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C} \\
+                      &=3(3^7)-3(2^7)+1 \\
+                      &=6178
+\end{align*}
+We subtract this from the total number of sequences, which is $4^7$, to get our answer: 
+$$4^7-6178=10206$$
+\noindent 
+[LEFT OFF HERE]
+\begin{tcolorbox}
+\textbf{Problem 4.16} Call a number prime-looking if it is composite but not divisible by $2, 3,$ or $5.$ The three smallest prime-looking numbers are $49, 77$, and $91$. There are $168$ prime numbers less than $1000$. How many prime-looking numbers are there less than $1000$? (Source: AMC)
+\end{tcolorbox}
+\noindent 
+We can not directly count this, so we can turn to complementary counting. One of the conditions for prime-looking numbers are that they cannot be divisible by 2, 3, or 5, so using complementary counting, we count the number of integers less than 1000 that are divisible by at least one of 2, 3, or 5. Let $A$, $B$, and $C$ be the sets of integers less than 1000 that are divisible by 2, 3, and 5, respectively. By PIE, we have 
+\begin{align*}
+    {A \cup B \cup C} &={A}+{B}+{C}-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C} \\
+                      &=\floor*{\frac{999}{2}}+\floor*{\frac{999}{3}}+\floor*{\frac{999}{5}}-\floor*{\frac{999}{2 \times 3}}-\floor*{\frac{999}{2 \times 5}}-\floor*{\frac{999}{3 \times 5}}+\floor*{\frac{999}{2 \times 3 \times 5}} \\
+                      &= 733
+\end{align*}
+The next condition for prime-looking numbers are that they must be composite, so using complementary counting, we count the number of non-composite numbers less than 1000. The problem tells us that there are 168 primes, but note that in our previous calculation, we included 2, 3, and 5, which are all primes. Therefore, to avoid double counting, we have 165 new numbers. Lastly, 1 is not composite, and we have not yet included it. Our answer is therefore 
+$$999-733-165-1=100$$
+\begin{tcolorbox}
+\textbf{Problem 4.17} Each of the $2001$ students at a high school studies either Spanish or French, and some study both. The number who study Spanish is between $80$ percent and $85$ percent of the school population, and the number who study French is between $30$ percent and $40$ percent. Let $m$ be the smallest number of students who could study both languages, and let $M$ be the largest number of students who could study both languages. Find $M-m$. (Source: AIME)
+\end{tcolorbox}
+\noindent
+Let $S$ be the set of students taking Spanish and $F$ be the set of students taking French. We are given the total number of students, so we can find the possible values of both $S$ and $F$: 
+$$\ceil*{0.8 \cdot 2001}\leq S \leq \floor*{0.85 \cdot 2001}$$
+$$\ceil*{0.3 \cdot 2001}\leq F \leq \floor*{0.4 \cdot 2001}$$
+This gives 
+$$1601 \leq S \leq 1700$$
+$$601 \leq F \leq 800$$
+By PIE, we have 
+$${S \cup F}=2001={S}+{F}-{S \cap F}$$
+To minimize ${S \cap F}$, we minimize $S$ and $F$:
+$$2001=1601+601-m$$
+$$m=201$$
+To maximize ${S \cap F}$, we maximize $S$ and $F$:
+$$2001=1700+800-M$$
+$$M=499$$
+Therefore, our answer is 
+\begin{align*}
+    M-m &=499-201 \\
+        &=298
+\end{align*}
+\noindent 
+\begin{tcolorbox}
+\textbf{Problem 4.18} How many non negative solutions are there to $a+b+c=15$ where $a \leq 7$, $b \leq 7$, and $c \leq 8$?
+\end{tcolorbox}
+\noindent 
+We can use PIE to count the complement to this problem, where we have sets to be where are variables exceed the given ranges. Let $A$, $B$, and $C$ be the sets where $a \geq 7$, $b \geq 7$, and $c \geq 8$, respectively. When $a \geq 7$, we have that $a'+b+c=8$, where $a' \geq 0$. This equation is a simple distribution problem with ${8-3+1} \choose {3-1}=15$ solutions and so $A=15$. $b$ has the same range as $a$ so $B=15$ and in applying the same reasoning to $c$, we get that $C={{7-3+1} \choose {3-1}}=10$. To count intersection of pairs of sets, we have to consider two ranges. For $A \cap B$, we have that $a \leq 7$ and $b \leq 7$, which yields $a'+b'+c=1$, where $a' \geq 0$ and $b' \geq 0$. Therefore, ${{A \cap B}}={{1+3-1} \choose {3-1}}=3$. Applying the same process, we get that ${A \cap C}=1$ and ${B \cap C}=1$. Note that there are 0 elements in the intersection of all three sets, as there are no non negative solutions to the equation with all three ranges. By PIE, we have that 
+\begin{align*}
+{A \cup B \cup C} &={A}+{B}+{C}-{A \cap B}-{A \cap C}-{B \cap C}+{A \cap B \cap C} \\
+                  &=15+15+10-3-1-1+0 \\
+                  &=35
+\end{align*}
+There are ${{15+3-1} \choose {3-1}}=136$ solutions to the equation without any restrictions, so our answer is therefore 
+$$136-35=101$$
+\begin{tcolorbox}
+\textbf{Problem 4.19} If $A_1, A_2,...,A_n$ are finite sets, prove that $$\bigcup_{i=1}^{n}A_i={\sum_{i=1}^{n}A_i}-\sum_{1 \leq i \leq j \leq n}^{n} {A_i \cap A_j}+...+(-1)^{n-1}{A_1 \cap A_2\cap...\cap A_n}$$
+\end{tcolorbox}
+To cover all cases, we let $x$ be in $k$ of the $A_i$ sets, where $1 \leq k \leq n$. If we can prove that the RHS counts $x$ exactly once, then the statement is proved true since the $k$ covers all possible scenarios for an element. For sums of single sets, $x$ is counted ${k \choose 1}$ times. For sums of intersections of sets, because $x$ is in $k$ sets, there are $k \choose 2$ intersections of pairs of sets in which $x$ appears. We continue this until the last term of the RHS, in which $k$ appears only once. The RHS therefore counts $x$  as appearing 
+$${k \choose 1}-{k \choose 2}+{k \choose 3}-...+(-1)^{k+1}{k \choose k}$$
+times. We must therefore prove that
+$${k \choose 1}-{k \choose 2}+{k \choose 3}-...+(-1)^{k+1}{k \choose k}=1$$
+We can subtract a ${k \choose 0}$ term from both sides. Doing this allows us to use the binomial theorem:
+$$-{k \choose 0}+{k \choose 1}-{k \choose 2}+{k \choose 3}-...+(-1)^{k+1}{k \choose k}=1-{k \choose 0}$$
+$$-\left({k \choose 0}-{k \choose 1}+{k \choose 2}+...+{k \choose k}(-1)^k\right)=0$$
+By the binomial theorem, 
+\begin{align*}
+    (1-1)^k=0 &={k \choose 0}1^{k}(-1)^0+{k \choose 1}1^{k-1}(-1)^1+{k \choose 2}1^{k-2}(-1)^2+...+{k \choose k}k^{k-k}1^0 \\
+              &={k \choose 0}-{k \choose 1}+{k \choose 2}+...+{k \choose k}(-1)^k
+\end{align*}
+Our previous equation is therefore correct, and so $x$ is only counted once. The general form as stated in the problem is therefore correct. 
+\begin{tcolorbox}
+\textbf{Problem 4.20} How many permutations of $(1, 2, 3,...,n)$ exist such that no integer is in its original position? These permutations are known as \textbf{derangements} of the $n$ set. For example, the derangements of $(1, 2, 3)$ are $(2, 3, 1)$ and $(3, 1, 2)$. 
+\end{tcolorbox}
+\noindent 
+[FINISHED REVISE] [USE AT LEAST ONE... REASONING TO INTRO THE PROBLEM] We can use PIE to count the complement to this problem, which is the number of permutations such that at least one integer is in its original position. We then subtract this from the total number of permutations of an $n$ set. \\
+\\
+\noindent 
+Letting $A_i$ be the set of permutations for which the integer $i$ is in its original position, we consider all possible intersection of sets using PIE. For $A_1$, 1 is fixed in its original position and the $n-1$ other integers can be rearranged however so $A_1=(n-1)!$. Applying the same reasoning, we get that $A_i=(n-1)!$ for $1 \leq i \leq n$, and there are $n \choose 1$ such sets. \\
+\\
+\noindent 
+For intersections of pairs of sets, two numbers are in their original position, and the $n-2$ other numbers can be rearranged however. Therefore, ${A_i} \cap {A_j}=(n-2)!$ for $1 \leq i \leq j \leq n$, and there are $n \choose 2$ such intersections. \\
+\\
+\noindent 
+In general, for intersections between $k$ sets, we have that${A_{i_1}} \cap {A_{i_2}} \cap {A_{i_3}} \cap...\cap {A_{i_k}}=(n-k)!$, and there are $n \choose k$ such intersections. We can count the union between all $A_i$ sets using PIE: 
+\begin{align*}
+    {A_1 \cup A_2 \cup...\cup A_n} &=  \sum_{k=1}^{n} (-1)^{k-1}{n      \choose k}(n-k)!     \\
+                                   &= \sum_{k=1}^{n} (-1)^{k-1} \frac{n!}{k!(n-k)!}(n-k)! \\
+                                   &= \sum_{k=1}^{n} (-1)^{k-1}  \frac{n!}{k!} \\
+                                   &= n!\sum_{k=1}^{n} (-1)^{k-1}\frac{1}{k!}
+\end{align*}
+We subtract this from the total number of permutations of an $n$ set, $n!$, to get the number of derangements of an $n$ set: 
+\begin{align*}
+    n!-n!\sum_{k=1}^{n} (-1)^{k-1}\frac{1}{k!} &= n!(1-\sum_{k=1}^{n} (-1)^{k-1}\frac{1}{k!}) \\
+                                               &= n!\sum_{k=0}^{n}(-1)^{k}\frac{1}{k!}
+\end{align*}
+\noindent 
+[WRITE CONCLUSION]
+
+\end{document}

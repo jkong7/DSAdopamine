@@ -1,0 +1,253 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{dirtytalk}
+\usepackage[autostyle]{csquotes}
+
+
+\DeclareMathOperator{\min}{min}
+
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\makeatother
+\title{\normalfont\notesize\textbf{Chapter 5}}
+\author{Jonathan Kong}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Distributions}
+\noindent 
+In this chapter, we will be looking at distributions, which are counting problems that deal with indistinguishable objects being distributed to distinguishable receivers. This means that it does not matter which objects are received, only the amount received by each receiver. \\
+\\
+\noindent 
+The most basic type of distribution problem we will look at is, for example, determining the number of ways to distribute 6 identical donuts to 4 different people. There is, in fact, a very neat counting argument that can be used to find a solution to this type of problem.\\
+\\
+\noindent 
+We will then look at distribution problems with more conditions as well as well as different types of problems that can be solved using distribution techniques. \\
+\\
+\noindent 
+We start with the basic distribution problem: [REVISE INTRODUCTION] 
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.1} How many ways can 3 identical toys be distributed among 3 children?
+\end{tcolorbox}
+\noindent 
+Let us start by making sense of the problem and listing out a few possibilities. As one possibility, we can give 1 toy to each child, which we can denote as $(1,1,1)$. We can also give 2 toys to the first child and 1 to the last, which we can denote as $(2,0,1)$. Since the scale of the problem is small enough, we can list out all possibilities and easily reach an answer. \\
+\\
+\noindent 
+However, we are more interested in finding a general counting method that will allow us to solve the general form of this problem. \\
+\\
+\noindent 
+The diagram below shows all distribution possibilities with an added visualization:
+\begin{center}
+\begin{tikzpicture}[scale=.8]
+  \def\total{3} % i+j = total
+  \xdef\y{0}
+  \foreach \i in {0,...,\total}{
+    \pgfmathsetmacro{\maxj}{int(\total-\i)}
+    \foreach \j in {0,...,\maxj}{
+      \pgfmathparse{int(\y+1)}\xdef\y{\pgfmathresult}
+      \pgfmathsetmacro{\k}{int(\total-\i-\j)}
+      \foreach \i in {1,...,\total}
+        \node at (\i,\y){$\star$};
+      \node at (.45+\j+\i,\y) {$\big|$};
+      \node at (.55+\i,\y) {$\big|$};
+      \node[left] at (-1,\y){(\i,\j,\k)};
+    }
+  }
+\end{tikzpicture}
+\end{center}\\
+Each toy can be represented as a star. We want a way to divide the line of stars into three sections so as to represent the number of toys each child receives. This can be done by inserting two bars as dividers. \\
+\\
+\noindent 
+An arrangement of the three stars and two bars is able to tell us one possible distribution and each distribution can be written as a line of stars and bars. We have reached a \textbf{bijection} between the number of orderings of three stars and two bars and the number of ways to distribute three identical toys to 3 children. A bijection is where every element of one set is paired with only one element of a second set, and vice versa. \\
+\\
+\noindent 
+Therefore, the number of arrangements of the stars and bars is equivalent to the number of distribution possibilities. \\
+\\
+\noindent 
+There are 3 identical stars and 2 identical bars, so this is a simple permutation problem: 
+$$\frac{5!}{3!2!}=10$$ 
+\noindent 
+We can also think of the stars being stationary and placing 2 bars in 5 slots. There are ${5 \choose 2}=10$ ways to do this. Both methods are identical and lead to the same answer. \\
+\\
+\noindent
+In this problem, we reduced a new and seemingly confusing counting problem to a simple permutation problem with some clever thinking. \\
+\\
+\noindent
+Let's apply this same method to a larger-scale problem:
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.2} How many ways can 20 pieces of candy be distributed among 5 children?
+\end{tcolorbox}
+\noindent 
+Because this scenario deals with much larger quantities, trying to list out all possible distributions using a casework method is definitely not realistic.  \\
+\\
+\noindent 
+Instead, we can use the method we just explored to greatly simplify the counting process. \\
+\\
+\noindent 
+Since we have 5 children, we want to divide the 20 pieces of candy into 5 sections. We can do this by having 20 stars to represent each piece and 4 bars to create 5 sections. \\
+\\
+\noindent 
+Therefore, we count the number of orderings of the 20 stars and 4 bars, which is 
+$$\frac{24!}{20!4!}={24 \choose 4}=10626$$
+Let's apply same this method to figure out a general result. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.3} How many ways can $n$ pieces of candy be distributed among $k$ children? 
+\end{tcolorbox}
+\noindent 
+Since we have $n$ pieces of candy and $k$ children, we can let there be $n$ stars and $k-1$ bars to represent the situation. The $n$ stars represent each piece of candy and the $k-1$ bars divide the stars into $k$ sections, where the amount of stars in each section represents the amount of candy each children receives. \\
+\\
+\noindent 
+The number of ways we can distribute $n$ pieces of candy among $k$ children is therefore equal to the number of orderings of the line of $n$ stars and $k-1$ stars, which is 
+$$\frac{(n+k+1)!}{n!(k-1)!}={{n+k+1} \choose {k-1}}$$
+Now that we have covered the most basic distribution problem type, we will next look at a distribution problem with an added condition. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.4} How many ways can 12 pieces of candy be distributed among 5 children if every child must receive at least 1 piece?
+\end{tcolorbox}
+\noindent
+Since our previous result covers cases where a child could receive zero pieces, we cannot use it. Instead, we should look for an easy way to bypass the condition. \\
+\\
+\noindent 
+We can do this by first giving each child one piece of candy, and then distributing the rest of the candy as we previously would. This guarantees a piece for each child, and counts all the distributions of the 12 pieces to the 5 children without the ones in which not everyone receives at least one piece. \\
+\\
+\noindent 
+Once we do this, we have 7 pieces left to distribute without any conditions. The number of ways to do this is
+$${{{7+5-1} \choose {5-1}}={11 \choose 4}=330}$$
+We can also use a direct stars and bars method to solve this. In the previous problem, it was possible for there to be more than one bar in between two stars to represent a child receiving 0 pieces. Now, to make it so that each child receives at least one piece, we make it so that at most one bar can be between two stars. Note that we also cannot place bars at the ends of the stars as this would also denote a child having 0 pieces. There are 5 children, so we have 4 bars and we place them in different positions in between stars, of which there are 11.  \\
+\\
+\noindent 
+We have reached a bijection with the number of ways to insert 4 bars into 11 slots and the number of ways to distribute 12 pieces of candy to 5 children where each child receives at least 1 piece. \\
+\\\
+\noindent
+Therefore, the answer is equivalent to the number of ways 4 bars can be placed into 11 positions, which is 
+$${{11 \choose 4}}=330$$
+\noindent 
+Both solutions are elegant and quick, and this will be the case for most of the problems in this chapter. Bypassing distribution conditions usually only require one creative extra step. Before moving on, let's look to generalize this distribution problem. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.5} How many ways can $n$ pieces of candy be distributed among $k$ children if each child must receive at least 1 piece?
+\end{tcolorbox}
+\noindent 
+We can use either method previously explored to arrive at the correct answer; we will provide the stars and bars solution. We have $n$ pieces of candy and $k$ children, so there are $k-1$ bars to place in different positions in between the $n$ stars, of which there are $n-1$. Therefore, the answer is equivalent to the number of ways $k-1$ bars can be placed into $n-1$ positions, which is
+$${{n-1} \choose {k-1}}$$
+\noindent 
+We'll now look at a problem where finding a distribution method to use is a lot less obvious. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.6} Find the number of positive integer solutions to the equation $a+b+c+d+e=25$
+\end{tcolorbox}
+\noindent
+At first glance, it may seem hard to make out a distribution solution to this problem. However, with a bit of clever thinking, we see that the problem is equivalent to distributing 25 pieces of candy to 5 children, where each child is represented by a variable. Note that because each variable must be a positive integer, we are dealing with a distribution problem where each receiver has at least one item. Therefore, the number of solutions to the equation is
+$${{25-1} \choose {5-1}}={24 \choose 4}=10626$$
+\noindent 
+This was a simple distribution problem in disguise. In the next couple of problems, we will look at a few harder conditions. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.7} Find the number of positive integer solutions to the equation $a+b+c+d=20$ if $a$ must be a positive power of $2$. 
+\end{tcolorbox}
+\noindent 
+To tackle the condition, we use casework with $a$. $a$ can be 2, 4, 8, or 16, which yields the equations $b+c+d=18$, $b+c+d=16$, $b+c+d=12$, and $b+c+d=4$, respectively. Note again the condition that each variable must be a positive integer. To reach our answer then, we sum the number of solutions to each equation, which yields
+$${17 \choose 2}+{15 \choose 2}+{11 \choose 2}+{3 \choose 2}=299$$
+\noindent 
+The condition that $a$ must be a positive power of 2 should had been a clear indicator towards using casework. The next problem features an inequality and requires a little more clever thinking to reach a distribution solution. 
+\\
+\begin{tcolorbox} 
+\textbf{Problem 5.8} Find the number of positive integer solutions to $a+b+c<20$
+\end{tcolorbox}
+\noindent 
+[LEFT OFF HERE] We can solve $a+b+c=3$, $a+b+c=4$,..., $a+b+c=19$ and add the number of solutions to each equation. In each equation, every variable must be at least one. Therefore, the number of solutions to each equation $a+b+c=n$ is ${{n-1} \choose {3-1}}={{n-1} \choose 2}$. We sum ${{n-1} \choose 2}$ over $3 \leq n \leq 19$ to get our answer: 
+$${2 \choose 2}+{3 \choose 2}+...+{18 \choose 2}$$
+Even though we've arrived at a solution, the expression is quite difficult to compute. This suggests that there may be another way to go about the problem that will yield a simpler expression. \\
+\\
+\noindent
+Consider the effect of adding one more variable and turning the inequality into an equation:
+$$a+b+c+d=20$$
+Because $d$ is a positive integer, any solution to the equation will consist of $a+b+c$ being less than 20. Therefore, every solution to $a+b+c+d=20$ is a solution to $a+b+c<20$. Our answer is therefore 
+$${{20-1} \choose {4-1}}={19 \choose 3}=969$$
+Note that since both of our solutions are correct, we have shown that 
+$${{19 \choose 3}={2 \choose 2}+{3 \choose 2}+...+{18 \choose 2}}$$
+This takes the form of a combinatorial identity known as the Hockey Stick identity:
+$${n+1 \choose k+1}={k \choose k}+{k+1 \choose k}+{k+2 \choose k}+...+{n \choose k}$$
+Solving this problem with a general situation yields a proof to the identity. \\
+\begin{tcolorbox}
+\textbf{Problem 5.9} A large bowl consists of 7 pears and 5 apples. How many ways can these fruits be distributed among 4 children?
+\end{tcolorbox}
+\noindent
+[REVISION COMPLETE] The situation presented in this problem is not the same as distributing twelve identical objects. To bypass the condition then, we can simply distribute each type of fruit individually. It is important to note that the distribution of the two fruit groups are independent from one another. This makes our calculation much simpler, as we can simply take the product of the two individual distributions. We can distribute the pears in ${{7+4-1} \choose {4-1}}={10 \choose 3}$ ways and the apples in ${{5+4-1} \choose {4-1}}={8 \choose 3}$ ways. The number of ways the combined amount can be distributed is therefore 
+$${10 \choose 3}{8 \choose 3}=6720$$
+\noindent 
+As seen again, a simple adjustment allowed us to easily bypass a condition. \\
+\begin{tcolorbox}
+\textbf{Problem 5.10} Ten \$100 bills are to be distributed among 5 building designers. Among them are Jake and Chris, who worked equally on the same part and are to receive the same pay. How many ways can the bills be distributed among the designers?
+\end{tcolorbox}
+\noindent 
+[REVISION COMPLETE] Here, a condition is placed upon the pay Jake and Chris receive, so we can easily use casework targeted at this condition to bypass it. If Jake and Chris receive $n$ bills, then $10-2n$ bills are to be distributed to the rest of the three designers. $10-2n$ bills can be distributed to three designers in ${{10-2n+3-1} \choose {3-1}}={{12-2n} \choose 2}$ ways. Jake and Chris can each receive 0 to 5 bills, which leads to six cases. In summing the distributions to the rest of the three designers in each of these six cases, we reach an answer of 
+$${12 \choose 2}+{10 \choose 2}+{8 \choose 2}+{6 \choose 2}+{4 \choose 2}+{2 \choose 2}={161}$$
+[LEFT OFF HERE]
+\begin{tcolorbox}
+\textbf{Problem 5.11} A large box of nuts consists of 9 packs of almonds, 7 packs of pistachios, and 6 packs of peanuts. Each person in a group of 4 workers is allergic to a different type of nut. How many ways can the nuts be distributed among the workers?
+\end{tcolorbox}
+\noindent
+We need to find an approach that easily trespasses the restriction. This can be done by individually distributing each of the three types of nuts. Doing this, we see that we are actually distributing each type of nut to 3 workers, as the fourth is allergic to it. For almonds, we are distributing 9 packs to 3 workers which can be done in ${{9+3-1} \choose {3-1}}={11 \choose 2}$ ways. Likewise, pistachios can be distributed in ${{7+3-1} \choose {3-1}}={9 \choose 2}$ ways and peanuts can be distributed in ${{6+3-1} \choose {3-1}}={8 \choose 2}$ ways. The number of ways all the nuts can be distributed is 
+$${11 \choose 2}{9 \choose 2}{8 \choose 2}=55440$$
+\begin{tcolorbox}
+\textbf{Problem 5.12} Michael wants to create a password for an online account. His password will be an ordering of the integers from 1 to 9, inclusive, where no two perfect squares are adjacent. How many possible passwords can Michael create?
+\end{tcolorbox}
+\noindent
+[REVISION COMPLETE] The condition tells us that the integers 1, 4, and 9 cannot be adjacent to each other. This means that they can only be placed adjacent to numbers which are not perfect squares. We can approach this problem using a stars and bars method, where we treat the other integers as dividers: 
+$$2\;3\;5\;6\;7\;8$$
+We want to order our integers so that two perfect squares will always be separated by an integer listed above. Therefore, there are seven positions we can place the perfect squares, which are between the integers listed above and at the start and end of the number sequence. We place three integers in the seven positions, so there are $7 \choose 3$ positions to place the 3 perfect squares. In those positions, there are $3!$ arrangements of the perfect squares. Likewise, there are $6!$ arrangements of the other integers. The number of passwords Michael can create is therefore
+$${{7 \choose 3}}(6!)(3!)=151200$$
+\noindent 
+The method explored in this problem is very efficient at solving counting problems that ask for certain objects to be separate from one another. By treating all other objects as dividers, the problem is reduced to a basic combination situation. \\
+\begin{tcolorbox}
+\textbf{Problem 5.13} How many terms are in the expansion of $(a+b+c+d)^{20}$?
+\end{tcolorbox}
+\noindent
+All terms in the expansion are in the form $a^xb^yc^zd^w$, where $x+y+z+w=20$. Each distinct solution to this equation gives a distinct term in the expansion, so the number of solutions is equal to the number of terms in the expansion. Note that not every term must include all four variables, so $x$, $y$, $z$, and $w$ can be 0. Therefore, there are ${{20+4-1} \choose {4-1}}={23 \choose 3}=1771$ solutions to the equation, and thus 1771 terms in the expansion. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 5.14} For some particular value of $N$, when $(a+b+c+d+1)^N$ is expanded and like terms are combined, the resulting expression contains exactly $1001$ terms that include all four variables $a, b,c,$ and $d$, each to some positive power. What is $N$? (Source: AMC)
+\end{tcolorbox}
+\noindent
+All terms in the expansion are in the form $a^xb^yc^zd^w1^f$, where $x+y+z+w+f=N$. Each distinct solution to this equation gives a distinct term in the expansion, so the number of solutions is equal to the number of terms in the expansion. It is very important to note that $x$, $y$, $z$, and $w$ must be at least one since all the terms we are given contain $a$, $b$, $c$, and $d$ to some positive power. $f$ can be 0 as this would not affect the restriction on the other variables. Therefore, the number of solutions is identical to the number of ways $N$ pieces of candy can be distributed to 5 children, where 4 of those children require at least one piece. We can give those 4 children one piece each, and then distribute the remaining $N-4$ pieces. This can be done in ${{N-4+5-1} \choose {5-1}}={N \choose 4}$ ways, so the expansion has ${N \choose 4}$ terms. We now have that 
+$${{N \choose 4}}=1001$$
+Unfortunately, there is no simple algebra we can do to obtain $N$. We can guess and check and eventually arrive to $N=14$.
+\begin{tcolorbox}
+\textbf{Problem 5.15} . Eli, Joy, Paul, and Sam want to form a company; the company will have 16 shares to split among the
+4 people. The following constraints are imposed:
+\begin{itemize}
+\item{Every person must get a positive integer number of shares, and all 16 shares must be given out.}
+
+\item{No one person can have more shares than the other three people combined.}
+\end{itemize}
+Assuming that shares are indistinguishable, but people are distinguishable, in how many ways can the
+shares be given out? (Source: HMMT)
+\end{tcolorbox}
+\noindent 
+Treat the amount of shares each person receives as a variable. We are then solving $$a+b+c+d=16$$ Because no one person can have more shares than the other three people combined, one person can have at most 8 shares. Each person must also receive a positive integer number of shares. We therefore have that $$1 \leq a,b,c,d \leq 8$$
+To solve this equation, we can calculate the number of solutions to the equation without restrictions and then subtract the number of solutions which include a variable greater than 8. There are ${{{16-1} \choose {4-1}}=455}$ total solutions to the equation. \\
+\\
+\noindent 
+Note that if there is a variable greater than 8, there can only be one such variable. If $a$ is this variable, then we are solving the equation $$a'+b+c+d=8$$ with no restrictions, since the substitution $a'=a-8$ works the job. There are ${{{8-1} \choose {4-1}}={{35}}}$ solutions to this equation, and there are 4 choices for the variable greater than 8. Therefore, our answer is 
+$$455-4(35)=315$$
+
+\end{document}

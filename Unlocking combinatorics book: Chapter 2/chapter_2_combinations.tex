@@ -1,0 +1,323 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{dirtytalk}
+\usepackage[autostyle]{csquotes}
+
+
+\DeclareMathOperator{\min}{min}
+
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\makeatother
+\title{\normalfont\notesize\textbf{Chapter 2}}
+\author{Jonathan Kong}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Combinations}
+\begin{tcolorbox}
+\textbf{Problem 2.1}\\
+(a) In how many ways can three different officers be chosen amongst 8 students?\\
+(b) In how many ways can the three officers be chosen if the order in which they are chosen does not matter?
+\end{tcolorbox}
+\noindent 
+(a) This is a simple permutation problem that we have looked at before. The first officer can be chosen in 8 ways, the second in 7 ways, and the third in 6 ways, for a total of $8 \times 7 \times 6=336$ ways to choose the three officers. \\
+\\
+\noindent
+(b) Note that this is not the same problem as in the previous part. Suppose the three officers we choose are labeled X, Y, and Z. Our condition tells us that the order in which they are chosen does not matter. For example, first choosing X, then Y, then Z, is identical to first choosing Y, then X, then Z in the context of this problem. 
+
+Suppose the three officers we choose are labeled X, Y, and Z. Our condition tells us that the order in which the officers are chosen does not matter, so all orderings of X, Y, and Z count as the same way to choose three officers. For example, first choosing X, then Y, then Z, is identical to first choosing Y, then X, then Z. The answer to our previous question assumes that order does matter, so all different orders of X, Y, and Z count as different ways to choose three officers. For each one choosing of three officers where order does not matter, it is counted $3!$ times where order does matter. Therefore, we must divide our previous answer by the number of orderings of X, Y, and Z, which is $3!$:
+$$\frac{8\times7\times6}{3!}=56$$
+\begin{tcolorbox}
+\textbf{Problem 2.2} How many ways can a 3-person basketball lineup be chosen from a 15 player basketball team (order in which the players are chosen does not matter)?
+\end{tcolorbox}
+\noindent 
+Assuming the order in which we choose the players matter, there are 15 choices for the first player, 14 for the second, and 13 for the third. This forms $15 \times 14 \times 13=2730$ choices. Using this answer over counts as the problem assumes order doesn't matter. For any three players, there are $3!$ orderings for them and since they are all the same in this context, we must divide by $3!$. 
+$$\frac{15 \times 14 \times 13}{3!}=455$$
+In the following problems, you may assume that the order in which objects are picked do not matter. 
+\begin{tcolorbox}
+\textbf{Problem 2.3} There are 7 items on a menu at a restuarant. If I want to order exactly 4 items, in how many ways can I do this. 
+\end{tcolorbox}
+\noindent 
+There are $7 \times 6 \times 5 \times 4$ ways to pick the items if order matters. Since order doesn't matter, we must divide by how many ways the items can be arranged. Since there are 4 items, they can be arranged in $4!$ ways. 
+$$\frac{7 \times 6 \times 5 \times 4}{4!}=35$$
+In general, suppose we want to pick $r$ objects from a total of $n$ objects where order doesn't matter. (UNFINISHED)
+
+
+\begin{tcolorbox}
+\textbf{Problem 2.4} Compute the following combinations:\\
+(a) $10 \choose 3$\\
+(b) $8 \choose 6$\\
+(c) $18 \choose 4$
+\end{tcolorbox}
+\noindent
+(a) $${10 \choose 3}={\frac{10 \times 9 \times 8}{3!}}=120$$\\
+(b) $${8 \choose 6}={\frac{8 \times 7 \times 6 \times 5 \times 4 \times 3}{6!}}=28$$\\
+(c) $${18 \choose 4}={\frac{18\times17\times16\times15}{4!}}=3060$$
+
+\begin{tcolorbox}
+\textbf{Problem 2.5} An ice cream shop has 8 candy toppings and 5 fruit toppings to choose from. If I want my ice cream with 2 candy toppings and 3 fruit toppings, how many combinations of ice cream are possible?
+\end{tcolorbox}
+\noindent 
+There are ${8 \choose 2}=\frac{8 \times 7}{2!}=28$
+ways to choose the candy toppings and ${5 \choose 3}=10$ ways to choose the fruit toppings. 
+\begin{tcolorbox}
+\textbf{Problem 2.6} Tom loves to read books in his free time. Today, he plans on reading 5 books from his bookshelf of 11 books. There is one book in particular that he loves to read more than the rest. If he must read this book, how many different collections of books can Tom read today?
+\end{tcolorbox}
+\noindent 
+Note that this problem is not equivalent to choosing 5 books from 11 due to the condition. Since there is one book Tom must read, we must choose the 4 other books that Tom will read. He has 10 remaining choices to choose from since one of the books has already been chosen. Our answer is therefore $${{10 \choose 4}}=210$$
+\begin{tcolorbox}
+\textbf{Problem 2.7} In a class of 12 students, a group of at most 4 students is to be chosen for a project. In how many ways can this group be chosen (the group can not have 0 students)?
+\end{tcolorbox}
+\noindent 
+We are told that the group consists of at most 4 students and can not have 0 students, telling us that it can have anywhere from 1 to 4 students. To compute how many groups can be chosen, we compute the number of groups for each possible size, and then sum, as this covers all possible groups: 
+$${12 \choose 1}+{12 \choose 2}+{12 \choose 3}+{12 \choose 4}=12+66+220+495=793$$
+\begin{tcolorbox}
+\textbf{Problem 2.8} A small garden can hold up to 8 plants. To completely fill it up, a gardener can choose from tulips and roses, of which there are 7 distinct ones each. If the gardener insists on having at least 5 tulips and 1 rose, how many ways can the garden be filled?  
+\end{tcolorbox}
+\noindent 
+Using the conditions, we find that the gardener can either have 5 tulips and 3 roses, 6 tulips and 2 roses, or 7 tulips and 1 rose. Therefore, the number of ways the garden can be filled is the sum of the cases: 
+$${7 \choose 5}{7 \choose 3}+{7 \choose 6}{7 \choose 2}+{7 \choose 7}{7 \choose 1}=889$$
+\begin{tcolorbox}
+\textbf{Problem 2.9} How many distinct triangles can be formed by connecting vertices of a regular hexagon?
+\end{tcolorbox}
+\noindent 
+Joining any 3 vertices of a hexagon forms a distinct triangle. The number of triangles is therefore the number of combinations of 3 vertices. This is ${{6 \choose 3}}=20$. 
+\begin{tcolorbox}
+\textbf{Problem 2.10} Consider an equilateral triangle with 9 points spaced evenly across the 3 sides. There is 1 point for each vertex and two additional points on each side. How many triangles can be formed by connecting these points?
+\end{tcolorbox}
+\noindent 
+The number of combinations of 3 points from the 9 points on the triangle is ${{9 \choose 3}}$. However, not all of these combinations result in a triangle. When three points on the same side of the triangle are chosen, a line is formed. There are 3 sides, each with 4 points, so there are $3{{4 \choose 3}}$ combinations of 3 points which form a line. Because other combinations of 3 points are not collinear, they will form a triangle. Therefore, we only need to subtract this value from our total to get our answer: 
+$${9 \choose 3}-3{4 \choose 3}=72$$
+\begin{tcolorbox}
+\textbf{Problem 2.11} Ten points are marked on a circle. How many distinct convex polygons of three or more sides can be drawn using some (or all) of the ten points as vertices? (Source: AIME)
+\end{tcolorbox}
+\noindent 
+Polygons with three sides are formed by joining combinations of 3 points, so there are ${{10 \choose 3}}$ polygons with three sides. Likewise, polygons with n sides are formed by joining combinations of n points, so there are ${{10 \choose n}}$ polygons with n sides. Here, we count the number of polygons with 3 or more sides, so n ranges from 3 to 10: $${{10 \choose 3}}+{{10 \choose 4}}+...+{{10 \choose 10}}=968$$ 
+\begin{tcolorbox}
+\noindent
+\textbf{Problem 2.12} How many rectangles are there in a 5 by 5 grid of squares?
+\vspace*{+0.25cm}
+
+\centering
+\begin{tikzpicture}
+\draw (0,0) -- (0,5);
+\draw (1,0) -- (1,5);
+\draw (2,0) -- (2,5);
+\draw (3,0) -- (3,5);
+\draw (4,0) -- (4,5);
+\draw (5,0) -- (5,5);
+\draw (0,5) -- (5,5);
+\draw (0,4) -- (5,4);
+\draw (0,3) -- (5,3);
+\draw (0,2) -- (5,2);
+\draw (0,1) -- (5,1);
+\draw (0,0) -- (5,0)
+\end{tikzpicture}
+\end{tcolorbox}
+\noindent 
+We could proceed using casework, counting the number of $1 \times 1$ rectangles, $1 \times 2$ rectangles, etc. However, a much faster solution can be found using combinations. Notice that a rectangle is determined by two vertical lines and two horizontal lines. In other words, picking out any two vertical lines and any two horizontal lines from the grid produces a distinct rectangle. Therefore, the number of rectangles can be found by computing the number of ways to choose two vertical lines and two horizontal lines. There are 6 of each line, so ${{6 \choose 2}}{{6 \choose 2}}=225$ rectangles. 
+\begin{tcolorbox}
+\textbf{Problem 2.13} Consider the following grid. Starting from the bottom left corner, how many paths are there to the top right corner if you can only move up or to the right?
+\vspace*{+0.25cm}
+
+\centering 
+\begin{tikzpicture}
+\draw (0,0) -- (0,3);
+\draw (1,0) -- (1,3);
+\draw (2,0) -- (2,3);
+\draw (3,0) -- (3,3);
+\draw (4,0) -- (4,3);
+\draw (5,0) -- (5,3);
+\draw (6,0) -- (6,3);
+\draw (0,3) -- (6,3);
+\draw (0,2) -- (6,2);
+\draw (0,1) -- (6,1);
+\draw (0,0) -- (6,0)
+\end{tikzpicture}
+\end{tcolorbox}
+\noindent 
+We begin by making sense of the problem and trying out a few possibilities. We will label each up-move as U and each right-move as R. Here are a few possibilities: 
+\begin{center}
+    RRRRRRUUU\\
+    RURRURURR\\
+    URRURURRR
+\end{center}
+Notice that every path can be written as a corresponding line of 6 R's and 3 U's. Every line of the R's and U's also corresponding to a distinct path. Therefore, we say that the number of paths and the number of arrangements of 6 R's and 3 U's are in bijection. [explain bijection like in distributions chapter]\\
+\\
+\noindent 
+Determining the number of arrangements of the 6 R's and 3 U's will give us the answer. This is simply a permutation with repeated elements: 
+$$\frac{9!}{6!3!}=84$$
+We can also think of it as choosing 3 out of the 9 total steps to be up; the rest of the 6 will have to be right:
+$${9 \choose 3}=84$$
+Choosing 6 out of the 9 total steps to be right also gives us the same answer: 
+$${9 \choose 6}=84$$
+Notice that in solving this problem for the general case, it is proved that 
+$${n \choose k}={n \choose {n-k}}$$
+\begin{tcolorbox}
+\textbf{Problem 2.14} The same grid is shown but note that this time one of the paths is gone. Starting from the bottom left and ending at the top right, how many paths are there?
+\vspace*{+0.25cm}
+
+\centering 
+\begin{tikzpicture}
+\draw (0,0) -- (0,3);
+\draw (1,0) -- (1,3);
+\draw (2,0) -- (2,3);
+\draw (3,0) -- (3,3);
+\draw (4,0) -- (4,3);
+\draw (5,0) -- (5,3);
+\draw (6,0) -- (6,3);
+\draw (0,3) -- (6,3);
+\draw (0,2) -- (3,2);
+\draw (4,2) -- (6,2);
+\draw (0,1) -- (6,1);
+\draw (0,0) -- (6,0)
+
+\end{tikzpicture}
+\end{tcolorbox}
+\noindent 
+The easiest way to approach this problem is through complementary counting. We first count how many paths there are without the condition and then find how many paths go through the missing edge. Without any conditions, there are ${9 \choose 3}=84$ paths. To count the number of paths going through the missing edge, we first count the number of paths that end on the starting point of the edge. These paths take the grid as shown below:
+\vspace*{+0.25cm}
+
+\begin{center}
+{\begin{tikzpicture}
+\draw (0,0) -- (0,2);
+\draw (1,0) -- (1,2);
+\draw (2,0) -- (2,2);
+\draw (0,2) -- (3,2);
+\draw (0,1) -- (3,1);
+\draw (0,0) -- (3,0);
+\draw (3,0) -- (3,2)
+\end{tikzpicture}}
+\end{center}
+\noindent
+The path goes through the edge and we then calculate the number of paths from the end point of the edge to the upper right corner. These paths take the grid as shown below: 
+\vspace*{+0.25cm}
+
+\begin{center}
+{\begin{tikzpicture}
+\draw (0,0) -- (2,0);
+\draw (0,0) -- (0,1);
+\draw (1,0) -- (1,1);
+\draw (2,0) -- (2,1);
+\draw (0,1) -- (2,1)
+\end{tikzpicture}}
+\end{center}
+\noindent 
+Therefore, the number of paths which go through the missing edge is ${5 \choose 2}{3 \choose 1}=30$. The number of paths that don't go through the missing edge is $84-30=54$.
+\begin{tcolorbox}
+\textbf{Problem 2.15} An ant starts out at $(0, 0)$. Each second, if it is currently at the square $(x, y)$, it can move to
+$(x − 1, y − 1)$, $(x − 1, y + 1)$, $(x + 1, y − 1)$, or $(x + 1, y + 1)$. In how many ways can it end up at
+$(2010, 2010)$ after 4020 seconds? (Source: HMMT) 
+\end{tcolorbox}
+\noindent 
+For each coordinate, a move will either increase or decrease its value by one. This means that in order to reach 2010 after 4020 moves, the only possibility is that there must be 3015 plus-moves and 1005 minus-moves for each coordinate. This means that the number of arrangements of 3015 pluses and 1005 minuses is in bijection with the number of ways the ant can end up at 2010 after 4020 seconds, which is
+$$\frac{4020!}{3015!1005!}={4020 \choose 1005}$$
+Because each second moves each coordinate independently, our answer is 
+$${4020 \choose 1005}^2$$
+\begin{tcolorbox}
+\textbf{Problem 2.16} Determine the number of diagonals in an $n$-sided polygon. 
+\end{tcolorbox}
+\noindent 
+A diagonal is formed by two points. Therefore, for an $n$-sided polygon with $n$ vertices, we should expect the number of diagonals to be $n \choose 2$. However, this over counts the number of diagonals as each side of a polygon is also composed of two vertices. Therefore, we start with $n \choose 2$, and then subtract away the number of sides, of which there are $n$:
+$${n \choose 2}-n$$
+This can be simplified to 
+$$\frac{n(n-1)}{2}-n = \frac{n^2-3n}{2}$$
+Another solution is as follows: There are $n$ ways to pick a vertex on the polygon. Once this point is picked, there are only 3 out of the $n$ vertices that cannot be chosen to form a diagonal with the picked point. These points are the picked point and the two adjacent points. We have that the number of diagonals is $n(n-3)$. However, note that this counts each diagonal twice, as there are two ways to form the same diagonal using this reasoning. Therefore, we must divide by 2: 
+$$\frac{n(n-3)}{2}=\frac{n^2-3n}{2}$$
+
+\begin{tcolorbox}
+\textbf{Problem 2.17} Let $S$ be the set of points $(a,b)$ in the coordinate plane, where each of $a$ and $b$ may be $- 1$, $0$, or $1$. How many distinct lines pass through at least two members of $S$? (Source: AMC)
+\end{tcolorbox}
+\noindent 
+We start by counting the number of ways to pick two points, which is $9 \choose 2=36$. However, by doing this, we have counted each line that passes through three points ${3 \choose 2}=3$ times. There are 3 horizontal, 3 vertical, and 2 diagonal lines and each contain three points. We need to subtract these lines twice so as to count them exactly once. Our answer is therefore 
+$$36-2(3+3+2)=20$$
+\begin{tcolorbox}
+\textbf{Problem 2.18} Compute the following combinations:\\
+(a) $6 \choose 2 $ and $6 \choose 4$\\
+(b) $8 \choose 3$ and $8 \choose 5$\\
+(d) Write and prove the identity that is implied by the combinations.
+\end{tcolorbox}
+\noindent 
+(a) $${10 \choose 4}=\frac{10 \times 9 \times 8 \times 7 \times 6}{4!}=210$$
+$${10 \choose 6}=\frac{10 \times 9 \times 8 \times 7 \times 6 \times 5 \times 4}{6!}=210$$
+(b) $${8 \choose 3}=\frac{8 \times 7 \times 6}{3!}=56$$
+$${8 \choose 5}=\frac{8 \times 7 \times 6 \times 5 \times 4}{5!}=56$$
+(c) It seems to be that \
+$${n \choose k}={n \choose {n-k}}$$
+We can prove this using algebra 
+$${n \choose {n-k}}=\frac{n!}{{(n-k)!}{(n-{(n-k))!}}}=\frac{n!}{{(n-k)!k!}}={n \choose k}$$
+\begin{tcolorbox}
+\textbf{Problem 2.19}  There are 10 people who want to choose a committee of 5 people among them. They do this by first
+electing a set of 1, 2, 3, or 4 committee leaders, who then choose among the remaining people to
+complete the 5-person committee. In how many ways can the committee be formed, assuming that
+people are distinguishable? (Two committees that have the same members but different sets of leaders
+are considered to be distinct.) (Source: HMMT)
+\end{tcolorbox}
+\noindent 
+We can tackle the problem by summing all the different sizes of the groups according to the amount of leaders they have. For groups with one leader, there are $10 \choose 1$ ways to select the leader. The remaining 4 members can be selected in $9 \choose 4$ ways and so there are ${10 \choose 1}{9 \choose 4}$ groups with one leader. Continuing this process, we can eventually sum all different-sized groups for our answer: 
+$${10 \choose 1}{9 \choose 4}+{10 \choose 2}{8 \choose 3}+{10 \choose 3}{7 \choose 2}+{10 \choose 4}{6 \choose 1}=7560$$
+Another way to approach this problem is by first selecting our 5-person committee, and then choosing leaders among then. There are $10 \choose 5$ 5-person committees. Among these 5 people, there are 
+$${5 \choose 1}+{5 \choose 2}+{5 \choose 3}+{5 \choose 4}=30$$ 
+ways to select leaders. Our answer is then 
+$$30 \cdot {10 \choose 5}=7560$$
+\begin{tcolorbox}
+\textbf{Problem 2.20} A fancy bed and breakfast inn has 5 rooms, each with a distinctive color-coded decor. One day 5 friends arrive to spend the night. There are no other guests that night. The friends can room in any combination they wish, but with no more than 2 friends per room. In how many can the innkeeper assign the guests to the rooms? (Source: AMC)
+\end{tcolorbox}
+\noindent
+We can break this problem into three cases. If each friend goes to a separate room, there are $5!=120$ assignments. \\
+\\
+\noindent 
+If 2 rooms house 2 guests and the third room hosts only 1 guest, there are ${5 \choose 2}$ to choose the two rooms with two guests and ${3 \choose 1}$ ways to choose the single room. To choose the guests to assign to the rooms, there are ${5 \choose 2}$ ways to select two guests to one of the double rooms and $3 \choose 1$ ways to select the single guest. The other two guests will be assigned to the other double room. For this case, the number of assignments is 
+$${5 \choose 2}^2{3 \choose 1}^2=900$$
+\noindent 
+If three rooms house one guest, and the other two, there are ${5 \choose 3}$ ways to choose the single rooms and ${2 \choose 1}$ ways to choose the double room. To select the guests, there are $5 \cdot 4 \cdot 3$ ways to fill the single rooms and the other two guests go to the double room. for this case, the number of assignments is 
+$${5 \choose 3}{2 \choose 1}(5 \cdot 4 \cdot 3)=1200$$
+We sum the cases to arrive at our answer: 
+$$120+900+1200=2220$$
+\begin{tcolorbox}
+\textbf{Problem 2.21} A frog is at the point (0, 0). Every second, he can jump one unit either up or right. He can only move
+to points (x,y) where x and y are not both odd. How many ways can he get to the point (8, 14)? (Soruce: HMMT)
+\end{tcolorbox}
+\noindent 
+At $(0,0)$, the frog can move to the right or up. However, notice that in any step he chooses to take, his second step must be the same so as not to land on a point with both odd coordinates. This is true for any step, where two steps in the same direction must always be taken. Therefore, instead of arriving at $(8,14)$, we can treat the problem as arriving at $(4,7)$ using single up and right steps. The number of paths for this is then 
+$${11 \choose 4}=330$$
+\begin{tcolorbox}
+\textbf{Problem 2.22} How many ways are there to insert +’s between the digits of 111111111111111 (fifteen 1’s) so that the
+result will be a multiple of 30? (Source: HMMT)
+\end{tcolorbox}
+\noindent 
+No matter how we place +'s, the result will always be a multiple of three. We therefore need to place +'s so that the result will be a multiple of 10. We then need to insert 9 +'s. There are 14 slots to do so and our answer is therefore
+$${14 \choose 9}=2002$$
+\begin{tcolorbox}
+\textbf{Problem 2.23} How many triangles with positive area have all their vertices at points $(i,j)$ in the coordinate plane, where $i$ and $j$ are integers between $1$ and $5$, inclusive? (Source: AMC)
+\end{tcolorbox}
+\noindent 
+We approach this problem by first calculating combinations of three points, and then subtract combinations that don't yield a triangle. There are 25 points which means there are ${25 \choose 3}=2300$ combinations. However, there are combinations that don't yield a triangle, which are three points on a line. \\
+\\
+\noindent 
+We can begin with rows and columns. There are 5 rows and 5 columns, which gives $$10{5 \choose 2}=100$$
+As for diagonals, we start with diagonals with 5 points, of which there are 2: $$2{5 \choose 2}=20$$
+There are 4 diagonals with 4 points: $$4{4 \choose 3}=16$$
+There are 4 diagonals with 3 points: $$4{3 \choose 3}=4$$
+Finally, we count the diagonals without a slope of 1. This yields 12 new lines. \\
+\\
+\noindent 
+Our answer is therefore 
+$$2300-100-20-16-4-12=2148$$
+\end{document}

@@ -1,0 +1,149 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{dirtytalk}
+\usepackage[autostyle]{csquotes}
+
+
+\DeclareMathOperator{\min}{min}
+
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\makeatother
+\title{\normalfont\notesize\textbf{Chapter 3}}
+\author{Jonathan Kong}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Combinatorial Identities}
+In the previous chapter, we looked at the combinatorial identity ${{n \choose k}}={{{n} \choose {n-k}}}$. We proved it using a combinatorial proof, which is an argument that shows how both sides of an identity count the same thing. In this chapter, we will look at more combinatorial identities, and proceed to prove them using combinatorial proofs. Although these identities can also be proved using algebraic expansion, combinatorial proofs do more to tell us \textit{why} an identity is true. They also help develop further solving and thinking skills for counting problems.  \\
+\\
+\noindent
+Most identities have a side with lesser terms than the other side. In this chapter, most identities will have a side with only one term. It is a good idea to begin with this side and come up with a simple counting explanation for it. After this, we have to find an explanation that shows the other side also counts the same thing. \\
+\\
+\noindent 
+Many identities have sums which is a strong indication that some kind of casework may be involved. One technique that will be used very commonly in this chapter is breaking an original group into multiple groups using casework as a way to reflect a sum. \\
+\\
+\noindent
+Throughout the chapter, the solutions will include different scenarios that all are able to provide a sufficient combinatorial proof (e.g. a club, a sports team, names). Obviously, there is no need to worry about these details; as long as what you are trying to mathematically express lines up with the solution, it is a sufficient proof. \\
+\\
+\noindent
+Note: We will be using LHS for \say{left hand side} and RHS for \say{right hand side} throughout the chapter. \\
+\\
+\noindent 
+The first identity we will look at is a simple example of using cases to equate a sum to a single binomial coefficient.
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.1} Prove the identity 
+    $${n \choose k}={n-1 \choose k-1}+{n-1 \choose k}$$
+\end{tcolorbox}
+\noindent 
+The LHS counts the number of ways $k$ people can be selected from a group of $n$ people. Suppose one person from the group of $n$ people is named Jim. The RHS counts the number of ways $k$ people can be selected using the cases where Jim is either selected or not selected. If Jim is selected, we must select $k-1$ other people from the remaining group of $n-1$ people: ${{{n-1} \choose {k-1}}}$. If Jim is not selected, we still must select $k$ people but from only $n-1$ people because Jim is not an option: ${{{n-1} \choose {k}}}$. Since the selection must either include Jim or not include Jim, summing these cases gives us the total number of selections. Hence, the RHS and the LHS both count the number of possible selections, therefore proving the identity. \\
+\\
+\noindent 
+In this proof, we established a group of $n$ people by our counting explanation for the LHS. The sum on the RHS was the indication that this group must be broken up into two so that each term could represent one sub-group. The cases with Jim being selected or not selected allowed the group to be sufficiently broken up to match the RHS. \\
+\\
+\noindent 
+The challenge of most combinatorial proofs falls in finding a clever way to split or rearrange an originally established group in a way that matches the other side of the identity. In the next identity, begin again with the side with lesser terms, and work to see how the other side relates. The terms on differing sides of the equation look very different from one another, so it may be a little more difficult to form a connection. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.2} Prove the identity
+ $$2^n={n \choose 0} + {n\choose 1} + {n\choose 2} +...+ {n\choose n}$$
+\end{tcolorbox}
+\noindent 
+Suppose we want to create a basketball team that can consist of 0 to $n$ players and that is selected from a group of $n$ students. Each of the $n$ students can either be on the team or not be on the team. Each student has 2 choices, and since there are $n$ students, there are $2^n$ choices in total and thus $2^n$ ways to form the team. The RHS also counts the number of ways to form the team by using the sum of all possible team sizes. $n \choose k$ counts the number of teams with $k$ players. To cover all sizes, we sum $k$ over $0 \leq k \leq n$ to give us a second way of counting the number of ways to form the team, therefore proving the identity. \\
+\\
+\noindent 
+The next identity is similar, but requires even further creativity to form a connection between terms. Use the previous proof as a base for what your proof should look like. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.3} Prove the identity
+$$3^n=2^0{n \choose 0}+2^1{n \choose 1}+2^2{n \choose 2}+...+2^n{n \choose n}$$
+\end{tcolorbox}
+\noindent 
+Suppose we want to create a basketball team that can consist of 0 to $n$ players and that is selected from a group of $n$ students. Clearly, we cannot structure the team so that a student is either in or not in like the previous identity or else there will be $2^n$ possible teams, and not $3^n$. Instead, we create three options. Each student can either be a regular player, a practice player, or not on the team. Each of the $n$ students has 3 choices, so there are $3^n$ choices in total and thus $3^n$ ways to form the team. We can also first choose how many students will be on the team, and then choose whether they are a regular player or a practice player. ${n \choose k}$ determines the size of the team, and the $2^k$ term determines whether each of those $k$ chosen players are a regular player or a practice player, so $2^k{n \choose k}$ counts all the possibilities for a team with $k$ players. To cover all sizes, we sum $k$ over $0 \leq k \leq n$ to give us a second way of counting the number of ways to form the team, therefore proving the identity.\\
+\\
+\noindent 
+The next few identities will again look at cleverly breaking apart an originally established group to reflect a sum.
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.4} Prove the identity
+$${n \choose 2}={{n-k} \choose 2}+{k \choose 2}+k(n-k)$$
+\end{tcolorbox}
+\noindent 
+Suppose that we want to choose 2 members to be officers of a club with $n$ members. This can be done in $n \choose 2$ ways, as counted by the LHS. Now suppose that the $n$ members of the club are broken into groups of size $k$ and $n-k$, where $k$ is a non negative integer less than or equal to $n$. The 2 members that are chosen can either be from the same group or from different groups. Choosing 2 people from the group with $n-k$ people can be done in ${n-k} \choose 2$ ways and choosing 2 people from the group with $k$ people can be done in $k \choose 2$ ways, for ${{n-k} \choose 2} + {{k} \choose 2}$ ways to choose 2 members from the same group. If the 2 members are from different groups, there are $k(n-k)$ ways to choose them. Summing these cases gives a second way of counting the number of ways to choose 2 members to be officers, therefore proving the identity. \\
+\\
+\noindent 
+Looking at the terms on the RHS should have given you an idea on how to split the original group. The introduction of the $k$ variable with the terms ${n-k} \choose 2$ and $k \choose 2$ indicates that the original $n$ group is to be split into an $n-k$ and $k$ group. After this, matching each RHS term to a counting representation should have followed quite easily.
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.5} Prove the identity
+$${{2n \choose 2}}=2{n \choose 2}+n^2$$
+\end{tcolorbox}
+\noindent 
+Suppose that we want to choose 2 balls from a pile of $n$ red balls and $n$ blue balls. This can be done in $2n \choose 2$ ways, as counted by the LHS. The two balls that are chosen can either be of the same color or different color. We can choose 2 red balls in $n \choose 2$ ways and 2 blue balls in $n \choose 2$ ways, for $2{n \choose 2}$ ways to pick 2 balls of the same color. There are $n$ ways to pick a ball of each color, for $n^2$ ways to choose 2 balls of different color. Summing these cases gives a second way of counting the number of ways to choose the 2 balls, therefore proving the identity. \\
+\\
+\noindent 
+For this identity, the most important step was splitting the original $2n$ group into two distinct $n$ groups. Counting all the possibilities for which to select two balls from two $n$ groups then leads easily to the RHS sum. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.6} Prove the identity 
+$${{3n \choose 3}}=3{n \choose 3}+6n{n \choose 2}+n^3$$
+\end{tcolorbox}
+\noindent 
+Seeing that this identity looks similar to the previous identity, we should think to use a similar argument. Suppose that we want to choose 3 balls from a pile of $n$ red balls, $n$ blue balls, and $n$ yellow balls. This can be done in $3n \choose n$ ways, as counted by the LHS. There are 3 colors and $n \choose 3$ ways to choose balls of one color, so $3{n \choose 3}$ ways to choose balls of the same color. For two balls to be the same color and the third to be different, there are 3 colors to select for the two balls and $n \choose 2$ ways to choose them and for the third ball, there are now 2 colors to select from and $n$ ways to choose it. In total, this case contributes $6n{n \choose 2}$ ways. There are $n$ ways to pick a ball of each color, for $n^3$ ways to choose 3 balls of different colors. Summing these cases gives a second way of counting the number of ways to choose the 3 balls, therefore proving the identity. \\
+\\
+\noindent
+The basis of this proof is exactly the same as the previous identity. Here, we split the original $3n$ group into three distinct $n$ groups and counting the number of ways to select three balls from three $n$ groups leads to the RHS sum. \\
+\\
+\noindent 
+For the next identity, try considering the \textit{order} in which a group is formed. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.7} Prove the identity
+$${n \choose k}{k \choose 3}={n \choose 3}{n-3 \choose k-3}$$
+\end{tcolorbox}
+\noindent
+Suppose we want to form a club with $k$ members from a group of $n$ people and we want 3 of those members to be officers. The LHS counts the number of ways we can initially form our club, which is ${{n \choose k}}$, and then designate 3 of those club members to be officers, which is ${{k \choose 3}}$, for a total of ${n \choose k}{k \choose 3}$ ways to form the complete club. The RHS counts the number of ways to first choose the three officers, which is $n \choose 3$, and then choose the rest of the $k-3$ members from the remaining $n-3$ people, which is ${{{n-3} \choose {k-3}}}$, for a total of ${n \choose 3}{n-3 \choose k-3}$ ways to form the complete club. Both sides count the number of ways to form the complete club with members and officers, therefore proving the identity. \\
+\\
+\noindent
+[LEFT OFF HERE]The last two identities can be solved by combining the methods of dividing the total as well as group forming with all possible sizes. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.8} Prove the identity 
+$$2^m{n \choose m}=\sum_{k=0}^{n}{n \choose k}{{n-k} \choose {m-k}}$$
+\end{tcolorbox}
+\noindent 
+We begin with the simpler side, which here appears to be the LHS. Suppose that among $n$ people, we choose an $m$-person club. Among the $m$ people in the club, we then choose a group to go on a field trip. There are ${n \choose m}$ ways to pick the club and because each person in the club will either be in or not in the field trip group, there are $2^m$ ways to pick the field trip group for ${2^m{n \choose m}}$ total groups. For the RHS, we first choose $k$ people out of the $n$ total to be in the field trip group. We then choose the additional $m-k$ members of the club from the $n-k$ remaining people. We sum the product ${n \choose k}{{n-k} \choose {m-k}}$ over all possible values of $k$ for a second way to count the total number of groups, therefore proving the identity. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.9} Prove the identity 
+$${2n \choose n}={n \choose 0}^2+{n \choose 1}^2+{n \choose 2}^2+...+{n \choose n}^2$$
+\end{tcolorbox}
+\noindent 
+From the previous chapter, we know that ${n \choose k}={{n} \choose {n-k}}$, so we can begin by expressing each ${{n \choose k}}^2$ term as ${{n \choose k}{n \choose {n-k}}}$, where $k$ is a non negative integer less than or equal to $n$. The LHS counts the number of ways to form a club with $n$ members from a group of $2n$ people. Suppose that the $2n$ people are made of $n$ boys and $n$ girls. If there are $k$ boys in the club, then there are $n-k$ girls in the club, so ${{n \choose k}{n \choose {n-k}}}$ counts the number of clubs with this size of boys and girls. To cover all sizes, we sum $k$ over $0 \leq k \leq n$ to give us a second way of counting the number of ways to form the club, therefore proving the identity. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 3.10} Prove the identity 
+$${m+n \choose k}={m \choose 0}{n \choose k}+{m \choose 1}{n \choose k-1}+{m \choose 2}{n \choose k-2}+...+{m \choose k}{n \choose 0}$$
+\end{tcolorbox}
+\noindent 
+Suppose we want to form a speech and debate team with $k$ members from a group consisting of $m$ boys and $n$ girls. This can be done in ${{{m+n} \choose k}}$ ways, as counted by the LHS. The RHS counts all possible cases of how many boys and how many girls can be on the $k$-member team where ${m \choose 0}{n \choose k}$ counts the number of teams with 0 boys and $k$ girls and ${{m \choose 1}}{n \choose {k-1}}$ counts the number of teams with 1 boy and $k-1$ teams, all the way to ${m \choose k}{n \choose 0}$, which counts the number of teams with $k$ boys and 0 girls. Summing these cases gives us a second way counting the number of ways to form the team, therefore proving the identity. \\
+\\
+\noindent
+In this chapter, we looked at combinatorial identities and proceeded to use \textit{combinatorial proofs} to prove them. This is a very powerful proof method and can be used to prove any combinatorial identity, no matter how complex. The identities we looked at could all be proven using some sort of clever casework, where we begin first with the simpler side and then work to form the more complicated side. Overall, most combinatorial identities can be proven using some variation of the casework methods we looked at in this chapter.  
+\end{document}

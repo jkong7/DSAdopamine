@@ -1,0 +1,139 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{dirtytalk}
+\usepackage[autostyle]{csquotes}
+
+
+\DeclareMathOperator{\min}{min}
+
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\makeatother
+\title{\normalfont\notesize\textbf{Chapter 1}}
+\author{Jonathan Kong}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Counting Techniques}
+Casework
+\begin{tcolorbox}
+\textbf{Problem 1.1} How many positive integer solutions satisfy the equation {$x+y^3<33$}?
+\end{tcolorbox}
+\noindent 
+We approach this problem by using casework for the possible values of $y$, as we note that it can only be a few values. \\
+\\
+\noindent 
+$y=1$: We have that $x<32$, so $x$ can be any value between 1 and 31, inclusive, for 31 possible values. \\
+\\
+\noindent 
+$y=2$: We have that $x<25$, so $x$ can be any value between 1 between 24, inclusive, for 24 possible values. \\
+\\
+\noindent 
+$y=3$: We have that $x<6$, so $x$ can be any value between 1 and 5, inclusive, for 5 possible values. \\
+\\
+\noindent 
+$y$ can not be greater than 3 and so we have covered all cases. Our answer is therefore 
+$$31+24+5=60$$
+\begin{tcolorbox}
+\textbf{Problem 1.2} If I had the word ‘SCIENCE’ which has 7 letters, and I wanted to make 2 letter phrases out of this word, how many ways can I do that? 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.3} At a certain university, the division of mathematical sciences consists of the departments of mathematics, statistics, and computer science. There are two male and two female professors in each department. A committee of six professors is to contain three men and three women and must also contain two professors from each of the three departments. Find the number of possible committees that can be formed subject to these requirements. (Source: AIME)
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.4} How many positive integers less than 10,000 have at most two different digits? (Source: AIME)
+\end{tcolorbox}
+\noindent 
+
+Complementary 
+\begin{tcolorbox}
+\textbf{Problem 1.5} 10 runners compete in a 100 meter dash. How many placements for the top 3 positions are possible if one of the runners, Harry, always places in the top 3?
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.6} How many sequences of 5 one-digit numbers contain at least one 8?
+\end{tcolorbox}
+\noindent 
+We can approach this problem using complementary counting, where we first count the total number of five-digit sequences, and then subtract those without an 8. There are $10^5$ total five-digit sequences and $9^5$ five-digit sequences without an 8. Therefore, our answer is 
+$$10^5-9^5=40951$$
+\begin{tcolorbox}
+\textbf{Problem 1.7} How many integers between 1 and 1000 inclusive are not perfect cubes? 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.8} How many four-digit positive integers have at least one digit that is a 2 or a 3? (Source: AMC) 
+\end{tcolorbox}
+\noindent 
+We can approach this problem using complementary counting, where we first count the total number of four-digit integers, and then subtract those without a 2 or a 3. There are $9 \cdot 10^3=9000$ four-digit integers, as there are 9 possibilities for the ones digit and 10 possibilities for the rest of the three digits. There are $7 \cdot 8^3=3584$ four-digit integers without a 2 or a 3, as there are 7 possibilities for the ones digit and 8 possibilities for the rest of the three digits. Therefore, our answer is 
+$$9000-3584=5416$$
+\begin{tcolorbox}
+\textbf{Problem 1.8} 
+\end{tcolorbox}
+
+
+Constructive 
+\begin{tcolorbox}
+\textbf{Problem 1.9} Michael is looking to create a password which will consist of 2 letters followed by 2 numbers. How many possible passwords can he create? 
+\end{tcolorbox}
+\noindent 
+For each of the 2 letters, there are 26 choices. Then, for each of the 2 numbers, there are 10 choices. Therefore, our answer is 
+$$26 \cdot 26 \cdot 10 \cdot 10=67600$$
+\begin{tcolorbox}
+\textbf{Problem 1.10} How many 6-digit palindromes are there? 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.11} How many 7 digit palindromes with an even tens digit are there?
+\end{tcolorbox}
+\noindent 
+There are 9 choices for the ones digit, 5 choices for the tens digit, 10 choices for the hundreds digit, and 10 choices for the middle digit. The last three digits are chosen based on the choices made by the first three digits. Therefore, our answer is 
+$$9 \cdot 5 \cdot 10 \cdot 10=4500$$
+\begin{tcolorbox}
+\textbf{Problem 1.12} How many 7 digit numbers are there such that the first two digits are the same and the other 5 digits alternate in parity? 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.13} 4 basketball players, 5 baseball players, and 3 volleyball players sit together in a row of chairs. If the 3 volleyball players insist on sitting with one another, how many possible seatings are there? 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.14} Define a good word as a sequence of letters that consists only of the letters A, B, and
+C - some of these letters may not appear in the sequence - and in which A is never immediately followed by B, B
+is never immediately followed by C, and C is never immediately followed by A. How many seven-letter good words
+are there? (Source: AIME) 
+\end{tcolorbox}
+\noindent 
+The first letter can be any letter, so there are 3 choices. However, for the second letter, there are only 2 choices, as the same letter can not be used again. The same is for the third letter as well as each subsequent letter. Therefore, after the first letter, there are 2 choices for each of the 6 remaining letters. Our answer is therefore 
+$$3 \cdot 2^6=192$$
+\begin{tcolorbox}
+\textbf{Problem 1.15} Let $\mathcal{S}$ be the set of real numbers that can be represented as repeating decimals of the form $0.\overline{abc}$ where $a, b, c$ are distinct digits. Find the sum of the elements of $\mathcal{S}.$ 
+\end{tcolorbox}\\
+\\
+\noindent 
+Permutations: 
+\begin{tcolorbox}
+\textbf{Problem 1.16} How many distinct ways can the letters in NOISE?
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.17} How many distinct ways can the letters in PAPER be rearranged? 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.18} How many distinct ways can the letters in SUCCESS be rearranged? 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.19} How many distinct ways can the letters in DIVISIBLE be rearranged if the first three letters must be DII (in any order). 
+\end{tcolorbox}
+\begin{tcolorbox}
+\textbf{Problem 1.20} How many distinct ways can the letters in MISSISSIPPI be rearranged if the first three letters must be SII (in any order) and the next three letters must be MPP (in any order). 
+\end{tcolorbox}
+\end{document}

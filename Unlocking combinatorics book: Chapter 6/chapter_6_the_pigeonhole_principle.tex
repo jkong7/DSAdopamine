@@ -1,0 +1,144 @@
+
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{textcomp}
+\usepackage{siunitx}
+\usepackage{dirtytalk}
+\usepackage{xparse}% http://ctan.org/pkg/xparse
+\usepackage[autostyle]{csquotes}
+\DeclarePairedDelimiter
+
+\DeclareMathOperator{\min}{min}
+
+
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\makeatother
+\title{\normalfont\notesize\textbf{Chapter 6}}
+\author{Jonathan Kong}
+\date{}
+
+\begin{document}
+\maketitle
+\section{The Pigeonhole Principle}
+In this chapter, we will be taking a look at the Pigeonhole Principle, a simple mathematical concept that can be extended to solve numerous challenging counting problems. We will begin with the most basic example of the principle.    
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.1} If 8 pigeons are placed into 7 holes, prove that there exists at least one hole that contains more than 1 pigeon. 
+\end{tcolorbox}
+\noindent
+Assume, for the sake of contradiction, that each hole has at most 1 pigeon. This means that the total number of pigeons in the holes is at most 7. However, we know that the holes contain 8 pigeons, which contradicts the previous condition that the number of pigeons is at most 7. Therefore, it is not possible for each hole to contain at most 1 pigeon, which leads to the conclusion that there must exist at least one hole which contains more than 1 pigeon. \\
+\\
+\noindent 
+The simple concept explored in this problem, which is that if there are more pigeons than holes, then at least one hole must contain more than one pigeon, is all the Pigeonhole Principle is. At its core, this is just simple common sense and the formal proof is not necessary to understanding it. However,  for practice, let's first prove the general versions of the principle before moving on. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.2} If $n$ pigeons are placed into $m$ holes, where $n>m$, prove that there exists at least one hole that contains more than 1 pigeon. 
+\end{tcolorbox}
+\noindent
+We can proceed with the same proof by contradiction method. Assume, for the sake of contradiction, that each hole has at most 1 pigeon. This means that the total number of pigeons in the holes is at most $m$. However, we know that the holes contain $n$ pigeons, which contradicts the previous condition that the number of pigeons is at most $m$, since $n>m$. Therefore, it is not possible for each hole to contain at most 1 pigeon, so there must exist at least one hole which contains more than 1 pigeon. \\
+\\
+\noindent
+Next, let's prove the generalized version of the Pigeonhole Principle. 
+\begin{tcolorbox}
+\textbf{Problem 6.3} If $n$ pigeons are placed into $m$ holes, where $n>m$, prove that there exists at least one hole that contains at least $\lceil{n/m}\rceil$ pigeons. 
+\end{tcolorbox}
+\noindent
+Assume, for the sake of contradiction, that each hole contains less than $\lceil{n/m}\rceil$ pigeons. Each hole then contains at most $\lceil{n/m}\rceil {-1}$. Each hole has $\leq \lceil{n/m}\rceil {-1}$ pigeons, so the total number of pigeons is $k\leq (\lceil{n/m}\rceil {-1})$. This is less than $m \cdot \frac{n}{m}{=}n$. This is a contradiction, since there are a total of $n$ pigeons. Therefore, it is not possible for each hole to contain less than $\lceil{n/m}\rceil$ pigeons so at least one hole contains at least $\lceil{n/m}\rceil$ pigeons. \\
+\\  
+\noindent 
+Let's take a look at some basic problems we can solve using the principle. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.4} Prove that in a classroom with 27 students, there exists two students that share the same first letter in their name.
+\end{tcolorbox}
+\noindent
+There are 26 possible first letters, and 27 students. By the pigeonhole principle, since there are more students than letters, there are two students that must share the same first letter in their name. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.5} A toy factory randomly assigns each finished toy a two digit number. How many toys must be made to ensure that two of them will have the same number?
+\end{tcolorbox}
+\noindent
+There are 10 numbers a toy can be assigned to. We want the number of toys that will ensure two toys have the same number. The pigeonhole principle states that the least amount of toys needed is the least integer greater than 10, which is 11. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.6} At a party consisting of $n$ people, each person shakes hands with a number of people (someone can have 0 handshakes). Prove that there exists two people that have shaken hands with the same number of people. 
+\end{tcolorbox}
+\noindent
+The largest possible number of hands someone can shake is $n-1$, which is when they shake hands with everyone else at the party. The least possible number someone can shake is 0, which is when they shake hands with nobody. Each person can therefore shake hands with between 0 and $n-1$ people, for $n$ different numbers of handshakes. Since the number of people is not greater than the possible number of handshakes, it seems that we can not apply the pigeonhole principle to prove the statement. However, note that if someone shook hands with everybody else, then there cannot exist someone who shook hands with nobody. Therefore, the number of handshakes is either between 0 and $n-2$ or between 1 and $n-1$, and either case gives $n-1$ possible number of handshakes. Since we have more people than possible number of handshakes, the pigeonhole principle gives that there exists two people who have shaken hands with the same number of people. \\
+\\
+\noindent 
+Up to this point, the problems we've looked at have all been quite obvious in what our \say{pigeons} and \say{holes} should be, so the pigeonhole principle has been quite easy to use. We will next take a look at some problems where the principle is not in plain sight. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.7} Consider the set $S=\{1,2,3...,40\}$. Prove that given any 21 numbers from the set, the sum of two of the numbers is 41. 
+\end{tcolorbox}
+\noindent
+The problem concerns pairs of numbers whose sum is 41, so let's begin by considering all such pairs. The pairs are $\{1,40\}$, $\{2,39\}$,...,$\{20,21\}$. We see that there are 20 pairs and since we are given 21 distinct numbers from the set, the pigeonhole principle gives that there exists two distinct numbers that must belong in the same pair. Those two numbers sum to 41.  \\
+\\
+\noindent 
+Here, we chose our \say{pigeons} to be the 21 numbers, and our \say{holes} to be the 20 pairs. By doing this, we could prove that two of our numbers satisfied some property given by a hole, which in this case was summing to 41. Whenever we are solving a problem using the pigeonhole principle, we want to think to make our \say{holes} some desired property that we can prove a  number of our \say{pigeons} must share. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.8} Given any $n$ integers, prove that one can always choose 2 of them such that their difference is divisible by $n-1$.  
+\end{tcolorbox}
+\noindent
+For a pair of integers to have a difference that is divisible by $n-1$, they must have the same remainder when divided by $n-1$. We can see why this is true by considering two integers $a$ and $b$:
+$$\frac{a-b}{n-1}=\frac{a}{n-1}-\frac{b}{n-1}$$
+For $a-b$ to be divisible by $n-1$, the difference above must be an integer, which only occurs when $a$ and $b$ have the same remainder when divided by $n-1$. Upon division by $n-1$, the possible remainders are 0, 1, 2,..., $n-2$ for $n-1$ possible remainders. There are $n$ integers, so by the pigeonhole principle, there exists two integers that have the same remainder and hence have a difference that is divisible by $n-1$. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.9} Six distinct positive integers are randomly chosen between 1 and 2006, inclusive. What is the probability that some pair of these integers has a difference that is a multiple of 5? (Source: AMC)
+\end{tcolorbox}
+Seeing that this problem concerns difference and divisibility, it looks quite similar to the previous problem. We can proceed again by having our holes be remainders and our pigeons be the six numbers. For a pair of integers to have a difference that is a multiple of 5, their difference must be divisible by 5. This occurs only when the two integers have the same remainder when divided by 5. Upon division by 5, the possible remainders are 0, 1, 2, 3, and 4. Since there are six integers, the pigeonhole principle states that two integers will have the same remainder and hence have a difference that is divisible by 5. Therefore, the probability a pair of integers from the 6 integers has a difference divisible by 5 is 1.
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.10} A farmer owns a small 6 by 6 feet square garden. He wishes to plant 37 plants such that the greatest distance between two plants is at most 2 feet. Show whether or not this is possible. 
+\end{tcolorbox}
+We are concerned with the relationship between two plants from the 37. This implies the usage of the pigeonhole principle to show that two plants are of the "hole". Examining the 6 by 6 square, we see that we can divide it into 36 1 by 1 squares. Aha! The pigeonhole principle tells us that there exists a square containing at least 2 plants. We want to maximize the distance between these plants, which occurs when they are on opposite corners of the 1 by 1 square. This distance is $\sqrt{2}$.
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.11} : Fifty-one points are placed in a square of side length 1. Prove that there is a circle
+of radius 1/7 that contains three of the points. (Source: cut the knot)
+\end{tcolorbox}
+\noindent 
+We notice that since there are 51 points, we might think to make 50 holes and therefore split the square into 50 squares. However, in doing this, the pigeonhole principle only gives that there must be two points within one square. What we are trying to prove concerns three points. The highest number of squares we can have so that one square must contain 3 points is 25 as given by the generalized pigeonhole principle: 
+
+Each square has an area of $\frac{1}{25}$ so a side length of $\frac{1}{5}$. The diagonal, which is the largest distance two points in a square can be, therefore has a length of $\frac{\sqrt{2}}{5}$. To compare this length to the diameter of the circle, which is $\frac{2}{7}$, we can compare the squares of the lengths. Because $\frac{4}{50}<\frac{4}{49}$, $\frac{\sqrt{2}}{5}<\frac{2}{7}$. Therefore, all 3 points within the same square are enclosed by the circle. 
+\begin{tcolorbox}
+\textbf{Problem 6.12} Prove that having 100 whole numbers, one can choose 15 of them so that the difference between any two of them is divisible by 7. (Source: Manhattan Mathematical Olympiad)
+\end{tcolorbox}
+The difference between two numbers is divisible by 7 when they both have the same remainder when divided by 7. We have 100 integers, and 7 possible remainders (0-6). We can apply the generalized pigeonhole principle which tells us that there exists $\ceil{100/7}=15$ integers which share the same remainder. All pairs within those 15 integers therefore have a difference that is divisible by 7.  
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.13} Prove that for any 52 integers two can always be found such that the difference of their squares is divisible by 100.
+\end{tcolorbox}
+\noindent 
+Just like the previous problems, we should think to make the possible remainders our holes and the integers the pigeons. However, note that not every integer from 0 to 99 is a possible remainder. We are concerned with the remainder when the square of an integer is divided by 100. We note that for all integers of the same ones digit, the ones digit of the square is the same. We can square the integers from 0 to 9 to realize that a squared integer will end in a 0, 1, 4, 5, 6, or 9. There are therefore 51 possible remainders and since we have 52 integers, the PHP gives that the squares of two of them will have the same remainder when divided by 100 and therefore the difference of their squares is divisible by 100. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.14} Prove that for any 5 integers, none of which who have a prime divisor larger than 4, two can always be found such that their product is the square of an integer. 
+\end{tcolorbox}
+\noindent 
+Since each of the 5 integers do not have a prime divisor larger than 4, they can be expressed as some combination of 2's and 3's. We can denote two of the integers to be $2^{x_1}3^{x_2}$ and $2^{y_1}3^{y_2}$, respectively. Their product is $$2^{{x_{1}}+{y_{1}}}3^{{x_{2}}+{y_{2}}}$$
+This number is a square only when both exponents are even, and this occurs only when $x_1$ has the same parity as $y_1$ and $x_2$ has the same parity as $y_2$. Therefore, both numbers must have the same doubles of parities in the exponents, e.g. $(odd, even)$, $(even, even)$. There are 5 integers and $2^2=4$ distinct doubles of parities, so the pigeonhole principle gives that two integers share a same doubles of parity, and those two integers therefore have a product that is a square. 
+\\
+\begin{tcolorbox}
+\textbf{Problem 6.15} Given a set $M$ of $1985$ distinct positive integers, none of which has a prime divisor greater than $23$, prove that $M$ contains a subset of $4$ elements whose product is the $4$th power of an integer. (Source: IMO)
+\end{tcolorbox}
+\noindent 
+Each integer can be expressed as $2^{x_1}3^{x_2}5^{x_3}7^{x_4}11^{x_5}13^{x_6}17^{x_7}19^{x_8}23^{x_9}$. Since there are 1985 integers and $2^9=512$ exponent parity sets, the PHP gives that there must be two integers that share the same set. The product of these two integers will therefore have only even exponents, meaning it is a perfect square. We can remove these two integers and put their product in another set. We then have 1983 integers in $M$. We can keep applying the PHP and taking out perfect-square-products from $M$ until there are $\frac{1985-511}{2}=734$ perfect squares. Each product is still of the form $2^{x_1}3^{x_2}5^{x_3}7^{x_4}11^{x_5}13^{x_6}17^{x_7}19^{x_8}23^{x_9}$ and since there are 734 products and $2^9=512$ possible exponent parity sets, using the PHP again gives that there must be two products that share the same set. The product of these two products is therefore a 4th power. 
+
+
+\end{document}
