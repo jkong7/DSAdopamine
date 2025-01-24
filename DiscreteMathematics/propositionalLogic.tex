@@ -1,0 +1,319 @@
+% Hello!, you can use the percent symbol in order to write a commment in LaTeX.
+% I will try my best to document my LaTeX here so you know what's going on
+
+
+% These few lines are just to set up the LaTeX document by telling it what kind of document it is, as well as what packages/libraries I want to import and use. The ones here should be sufficient, but you should still import as needed.
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[all]{xy}
+
+\usepackage{amsmath,amsthm,amssymb,color,latexsym}
+\usepackage{mathtools}
+\usepackage{geometry}        
+\geometry{letterpaper}    
+\usepackage{graphicx}
+\usepackage{tabto}
+\usepackage{setspace}
+
+\usepackage[noframe]{showframe}
+\usepackage{framed}
+
+% Sets up "environments" of formatted text.
+\renewenvironment{shaded}{%
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{shadecolor}}%
+  \MakeFramed{\advance\hsize-\width \FrameRestore\FrameRestore}}%
+ {\endMakeFramed}
+\definecolor{shadecolor}{gray}{0.90}
+
+\newtheorem{problem}{Problem}
+
+\newenvironment{solution}[1][\it{Solution:}]{\textbf{#1 } }
+
+% Sets spacing for the document
+\onehalfspacing
+
+% All latex documents begin with a `\begin{document}`
+\begin{document}
+\begin{titlepage}
+   \begin{center}
+       \vspace*{9cm}
+
+       \textbf{CS 212 Winter 2025}
+
+       \vspace{0.5cm}
+        Homework \#1
+            
+        \vfill
+
+       \textbf{Jonathan Kong}\\
+       NetID dwa0713\\
+       Collaborators: Jonathan Kong\\             
+       Due Date: 16 Jan, 2015
+            
+   \end{center}
+\end{titlepage}
+%\noindent CS 212 Fall 2024\hfill Problem Set \# (insert number here)\\
+%Name: Kevin Fan \hfill Due 14 Mar, 2015\\ 
+%NetID: (Insert your NetID here) \\
+
+%\hrulefill
+\pagebreak
+
+\begin{problem}
+Translation 
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\ 
+\noindent 
+\textbf{a.} \\
+\noindent 
+$p$: Do every exercise in the textbook \\
+\noindent 
+$q$: Study daily \\
+\noindent 
+$r$: Receive an A in CS212 \\
+\noindent 
+\centerline{\fbox{$p \land q \rightarrow r$}}
+\\
+\noindent 
+\textbf{b.}
+\\
+\noindent 
+$p$: Case of emergency \\
+\noindent 
+$q$: Exit through front door \\
+\noindent 
+$r$: Exit through rear door \\
+\noindent 
+\centerline{\fbox{$p \rightarrow q \oplus r$}}
+\textbf{c.}
+\\
+\noindent 
+$p$: Can edit a protected Wikipedia entry \\
+\noindent 
+$q$: You are an administrator 
+\[
+\boxed{\neg q \rightarrow \neg p} \equiv \boxed{p \rightarrow q}
+\]
+\textbf{d.}
+\\
+\noindent 
+$p$: Can become the Queen of England \\
+\noindent 
+$q$: Born a royal \\
+\noindent 
+$r$: Participate in a popular uprising
+\[
+\boxed{\neg (q \lor r) \rightarrow \neg p} \equiv \boxed{p \rightarrow (q \lor r)}
+\]
+\textbf{e.} \\
+\noindent 
+$p$: User has paid the subscription fee \\
+\noindent 
+$q$: User enters a valid password \\
+\noindent 
+$r$: Access is granted \\
+\noindent 
+\textbf{i.} \centerline{\fbox{$p \land \neg q$}}\\
+\noindent 
+\textbf{ii.} \centerline{\fbox{$p \land q \rightarrow r$}}\\
+\noindent 
+\textbf{iii.} \[
+\boxed{\neg p \rightarrow \neg r} \equiv \boxed{r \rightarrow p}
+\]
+\end{solution}
+\end{shaded}
+
+% Creates a new page
+\pagebreak
+
+
+\begin{problem}
+Truth Tables
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\\
+\noindent 
+\textbf{a.} 
+$$
+\begin{array}{|c|c|c|c|c|}
+\hline
+p & q & p \land q & p \lor q & (p \land q) \land (p \lor q) \\ \hline
+T & T & T         & T         & T                           \\ \hline
+T & F & F         & T         & F                           \\ \hline
+F & T & F         & T         & F                           \\ \hline
+F & F & F         & F         & F                           \\ \hline
+\end{array}
+$$
+\centerline{$(p \land q) \land (p \lor q) \text{ v.s }p \lor q \rightarrow$\fbox{Not equivalent}} \\
+\\
+\\
+\noindent 
+\textbf{b.} 
+$$
+\begin{array}{|c|c|c|c|c|c|}
+\hline
+p & q & \neg p & \neg q & p \oplus q & \neg p \oplus \neg q \\ \hline
+T & T & F      & F      & F          & F                   \\ \hline
+T & F & F      & T      & T          & T                   \\ \hline
+F & T & T      & F      & T          & T                   \\ \hline
+F & F & T      & T      & F          & F                   \\ \hline
+\end{array}
+$$
+\centerline{$p \oplus q \text{ v.s. } \neg p \oplus \neg q \rightarrow$\fbox{Equivalent}}\\
+\\
+\\
+\noindent 
+\textbf{c.}
+$$
+\begin{array}{|c|c|c|c|c|c|c|}
+\hline
+p & q & r & q \to r & p \to (q \to r) & p \land q & (p \land q) \to r \\ \hline
+T & T & T & T & T & T & T                   \\ \hline
+T & T & F & F & F & T & F                   \\ \hline
+T & F & T & T & T & F & T                   \\ \hline
+T & F & F & T & T & F & T                   \\ \hline
+F & T & T & T & T & F & T                   \\ \hline
+F & T & F & F & T & F & T                   \\ \hline
+F & F & T & T & T & F & T                   \\ \hline
+F & F & F & T & T & F & T                   \\ \hline
+\end{array}
+$$
+\centerline{$p \rightarrow (q \to r) \text{ v.s. } (p \land q \rightarrow r)$ \rightarrow \fbox{Equivalent}}
+\\
+\end{solution}
+\end{shaded}
+
+
+\pagebreak
+
+
+\begin{problem}
+Lollapalooza
+\end{problem}
+\begin{shaded}
+
+\begin{solution}
+\\
+\noindent 
+\textbf{a.} The only circumstance in which your friend will help you move is if she is guaranteed your tickets, and that it is the \textbf{only} way to get your tickets. While this statement ensures she will get a ticket for helping, it does not guarantee that helping is the \textbf{only} way to obtain the tickets, so she is unwilling to help. \\
+\\
+\noindent 
+\textbf{b.} While this statement ensures that if your friend does not help you move, she won't get a ticket, it does \textbf{not} guarantee that by helping, she will receive a ticket. Therefore, her condition remains unmet, so she is unwilling to help.\\
+\\
+\noindent 
+\textbf{c.} "The only way to receive my tickets is if you help me move, and if you do, you are guaranteed those tickets."  With this statement, your friend knows that if she helps you move, she is \textbf{guaranteed} your tickets and that doing so is the \textbf{only} way she will receive your tickets. Since both parts of her condition are met, she is willing to help you move. 
+\\
+\end{solution}
+\end{shaded}
+
+
+\pagebreak
+
+
+\begin{problem}
+Proving Equivalence 
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+\textbf{a.} 
+\begin{align*}
+    p \rightarrow (q \rightarrow r) &\equiv p \rightarrow (\neg q \lor r) && \text{Implication} \\
+         &\equiv \neg p \lor (\neg q \lor r) && \text{Implication} \\
+         &\equiv (\neg p \lor \neg q) \lor r && \text{Associativity} \\
+         &\equiv \neg(p \land q) \lor r && \text{DeMorgan's} \\
+         &\equiv (p \land q) \rightarrow r  \ \checkmark && \text{Implication}
+\end{align*}
+\noindent 
+\textbf{b.} 
+\begin{align*}
+    (\neg p \rightarrow \neg q) \land (q \rightarrow p) &\equiv (p \lor q) \land (q \rightarrow p) && \text{Implication} \\
+         &\equiv (p \lor q) \land (\neg p \rightarrow \neg q) && \text{Contrapositive} \\
+         &\equiv (p \lor q) \land (p \lor \neg q) && \text{Implication} \\
+         &\equiv p \lor (q \land \neg q) && \text{Distributivity} \\
+         &\equiv p \lor F && \text{Negation} \\
+         &\equiv p \ \checkmark && \text{Identity}
+\end{align*}
+\noindent 
+\textbf{c.} 
+\begin{align*}
+    (p \rightarrow q) \lor (p \rightarrow \neg q) &\equiv (\neg p \lor q) \lor (\neg p \lor \neg q) && \text{Implication}\\
+         &\equiv \neg p \lor (q \lor \neg q) && \text{Distributivity} \\
+         &\equiv \neg p \lor T && \text{Negation} \\
+         &\equiv T \ \checkmark && \text{Domination} 
+\end{align*}
+\noindent 
+\textbf{d.}
+\begin{align*}
+    ((p \lor \neg p) \rightarrow p \land (q \rightarrow p)) &\equiv ((T \rightarrow p) \land (q \rightarrow p)) && \text{Negation}\\
+         &\equiv ((F \lor p) \land (q \rightarrow p)) && \text{Implication}, \neg T \equiv F \\
+         &\equiv p \land (q \rightarrow p) && \text{Identity} \\
+         &\equiv p \land (\neg q \lor p) && \text{Implication}\\
+         &\equiv (p \land \neg q) \lor (p \land p) && \text{Distributivity} \\
+         &\equiv (p \land \neg q) \lor p && \text{Idempotency} \\
+         &\equiv p \ \checkmark && \text{Absorption}
+\end{align*}
+\end{solution}
+\end{shaded}
+
+\pagebreak
+
+
+\begin{problem}
+Logic Puzzles
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+\textbf{a.}  
+\begin{align*}
+    p \lor q &\equiv \neg(\neg p) \lor \neg(\neg q) && \text{Double negation}\\
+         &\equiv \fbox{\neg(\neg p \land \neg q)} && \text{DeMorgan's} \\
+\end{align*}
+\noindent 
+\textbf{b.} 
+\begin{align*}
+    p \rightarrow q &\equiv \neg p \lor q && \text{Implication} \\
+         &\equiv \neg(\neg(\neg p) \lor \neg(\neg q) && \text{Double negation} \\
+         &\equiv \fbox{\neg(p \land \neg q)} && \text{DeMorgan's} \\
+\end{align*}
+\noindent 
+\textbf{c.}
+\begin{align*}
+    p \oplus q &\equiv (p \land \neg q) \lor (\neg p \land q) && \text{2 true rows SOP} \\
+         &\equiv \fbox{\neg(\neg(p \land \neg q) \land \neg(\neg p \land q))} && \text{DeMorgan's} \\
+\end{align*}
+\\
+\end{solution}
+\end{shaded}
+
+\pagebreak
+
+
+\begin{problem}
+Feedback
+\end{problem}
+
+\begin{shaded}
+\begin{solution}\\
+\noindent
+\centerline{\fbox{\textbf{Three} hours}}
+\end{solution}
+\end{shaded}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Continue with this pattern if there are more %%%%%%%
+%%%%%%%%%%%%%%%%% homework problems %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\end{document}

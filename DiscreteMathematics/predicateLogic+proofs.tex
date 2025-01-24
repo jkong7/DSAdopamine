@@ -1,0 +1,253 @@
+% Hello!, you can use the percent symbol in order to write a commment in LaTeX.
+% I will try my best to document my LaTeX here so you know what's going on
+
+
+% These few lines are just to set up the LaTeX document by telling it what kind of document it is, as well as what packages/libraries I want to import and use. The ones here should be sufficient, but you should still import as needed.
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[all]{xy}
+
+\usepackage{amsmath,amsthm,amssymb,color,latexsym}
+\usepackage{mathtools}
+\usepackage{geometry}        
+\geometry{letterpaper}    
+\usepackage{graphicx}
+\usepackage{tabto}
+\usepackage{setspace}
+
+\usepackage[noframe]{showframe}
+\usepackage{framed}
+
+% Sets up "environments" of formatted text.
+\renewenvironment{shaded}{%
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{shadecolor}}%
+  \MakeFramed{\advance\hsize-\width \FrameRestore\FrameRestore}}%
+ {\endMakeFramed}
+\definecolor{shadecolor}{gray}{0.90}
+
+\newtheorem{problem}{Problem}
+
+\newenvironment{solution}[1][\it{Solution:}]{\textbf{#1 } }
+
+% Sets spacing for the document
+\onehalfspacing
+
+% All latex documents begin with a `\begin{document}`
+\begin{document}
+\begin{titlepage}
+   \begin{center}
+       \vspace*{9cm}
+
+       \textbf{CS 212 Winter 2025}
+
+       \vspace{0.5cm}
+        Homework \#2
+            
+        \vfill
+
+       \textbf{Jonathan Kong}\\
+       NetID dwa0713\\
+       Collaborators: Jonathan Kong\\             
+       Due Date: 23 Jan, 2015
+            
+   \end{center}
+\end{titlepage}
+%\noindent CS 212 Fall 2024\hfill Problem Set \# (insert number here)\\
+%Name: Kevin Fan \hfill Due 14 Mar, 2015\\ 
+%NetID: (Insert your NetID here) \\
+
+%\hrulefill
+\pagebreak
+
+\begin{problem}
+Cooking Up Logic 
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\ 
+\noindent 
+\textbf{a.} Bob likes every cuisine. 
+\\
+\noindent
+\textbf{b.} Every Northwestern student has a cuisine that they don't like but know how to cook. 
+\\
+\noindent 
+\textbf{c.} There exists a Northwestern student who, for every cuisine that they like, they also know how to cook it. 
+\\
+\noindent 
+\textbf{d.} There are no two different Northwestern students who like the same
+cuisine. 
+\\
+\noindent 
+\textbf{e.} There exist two different Northwestern students whose knowledge of cooking cuisines is exactly identical.
+\\
+\noindent 
+
+\end{solution}
+\end{shaded}
+
+% Creates a new page
+\pagebreak
+
+
+\begin{problem}
+Roaring Lines
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+\textbf{a.} $$\fbox{\forall x \ (S(x) \oplus R(x))}$$
+\noindent 
+\textbf{b.} $$\fbox{\exists x \ \forall y \ ((x\neq y) \rightarrow A(y,x))}$$
+\noindent 
+\textbf{c.} $$\fbox{\forall x \ (R(x) \rightarrow \exists y \ (\neg R(y) \land A(x,y))}$$
+\noindent 
+\textbf{d.} $$\fbox{\exists x \ \forall y \ ((x=y) \rightarrow L(x,y) \land (x\neq y) \rightarrow \neg L(x,y)}$$
+\noindent 
+\textbf{e.} $$\fbox{\exists x \ \forall y \ (S(x) \land (x \neq y) \rightarrow \neg S(y))}$$
+\end{solution}
+\end{shaded}
+
+
+\pagebreak
+
+
+\begin{problem}
+Mind Your Ps and Qs
+\end{problem}
+\begin{shaded}
+
+\begin{solution}
+\\
+\noindent 
+\textbf{a.} \\
+\noindent 
+Domain: All students at my local high school\\
+\noindent 
+$P(x)$: Student $x$ takes math class \\
+\noindent 
+$Q(x)$: Student $x$ takes history class \\
+\noindent 
+The first expression means every student takes at least one of math or history (and possibly both), while the second means all students take math or all students take history. These are not equivalent because the first allows a mix of students taking different classes, while the second requires uniformity in the class taken by all students.\\
+\noindent 
+\textbf{b.} \\
+\noindent 
+Domain: Every American citizen\\
+\noindent 
+$P(x)$: Person $x$ is of the drinking age\\
+\noindent 
+$Q(x)$: Person $x$ is 21 years or older\\
+\noindent 
+Here, $P(x)$ and $Q(x)$ are equivalent because, in the United States, the legal drinking age 21 years or older. Therefore, $P(x) \lor Q(x)$ simplifies to just $P(x)$, making $\forall x (P(x) \lor Q(x)) \equiv \forall x P(x)$ and  $(\forall x P(x)) \lor (\forall x Q(x))$ simplifies to $\forall x P(x)$ because $\forall x P(x) \equiv \forall x Q(x)$, thus both expressions are logically equivalent in this context.
+\\
+\noindent 
+\textbf{c.} 
+\begin{align*}
+    \forall x \ (P(x) \lor Q(x)) &= \exists x \ \neg(P(x) \lor Q(x))\\
+         &= \fbox{\exists x \ (\neg P(x) \land \neg Q(x))}
+\end{align*}
+\noindent 
+\textbf{d.}
+\[
+(\forall x P(x)) \lor (\forall x Q(x)) \rightarrow \forall x (P(x) \lor Q(x))
+\]
+\noindent 
+If either the entire domain satisfies $P$ or the entire domain satisfies $Q$, it follows that for all $x$ in the domain, at least one of $P$ or $Q$ is satisfied. The reverse implication is not true as having that every member of the domain satisfies at least one of $P$ or $Q$ does not guarantee that every member satisfies $P$ or every member satisfies $Q$. 
+
+\end{solution}
+\end{shaded}
+
+
+\pagebreak
+
+
+\begin{problem}
+Being Direct
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+\textbf{a.} $n$ and $m$ are odd integers. Therefore, there exists an integer $j$ such that $n=2j+1$ and an integer $k$ such that $m=2k+1$. Consider $3n+m$: 
+\begin{align*}
+    3n+m &= 3(2j+1) + (2k+1)\\
+         &= 6j+2k+4 \\
+         &= 2(3j+k+2) 
+\end{align*}
+\noindent 
+Because $j$ and $k$ are integers, by closure properties, $3j+k+2$ is also an integer. Thus $3n+m=2z$ for some integer z. So, $3n+m$ is even. \\
+\noindent 
+\textbf{b.} Let $n$ be an arbitrary odd integer. Then, there exists an integer $k$ such that $n=2k+1$. Express $n$ as the difference of two squares, $a$ and $b$: $n=a^2 - b^2$. If it is found that $a$ and $b$ are integers, then $n$ is the difference of two squares. 
+\begin{align*}
+    n &= a^2 - b^2\\
+         &= (a+b)(a-b) 
+\end{align*}
+\noindent
+Here, taking advantage of $n=n * 1$, let $a+b=n$ and $a-b=1$. Solving the two equations for $a$ and $b$, we are left with 
+$$a=\frac{n+1}{2} \ \ \ b=\frac{n-1}{2}$$
+\noindent 
+Substitute $n=2k+1$ to both the $a$ and $b$ expressions and we are left with $a=k+1$ and $b=k$. Since $k$ is an integer, by closure properties, $a$ and $b$ are also therefore integers. So, every odd integer can be represented as the difference of two integer squares. 
+\end{solution}
+\end{shaded}
+
+\pagebreak
+
+
+\begin{problem}
+The Case(s) of the Ghost
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+\textbf{a.}  \\
+\noindent 
+\textbf{Case 1--Ghost starts at $R_1$:} You first check $R_2$ to which the ghost moves to $R_2$. You then check $R_3$ to which the ghost moves to either $R_1$ or $R_3$, its final position. \\
+\noindent 
+\textbf{Case 2--Ghost starts at $R_2$:} You first check $R_2$, to which you have caught the ghost.\\
+\noindent 
+\textbf{Case 3--Ghost starts at $R_3$:} You first check $R_2$, to which the ghost moves to either $R_2$ or $R_4$. You then check $R_4$. If the ghost was previously at $R_2$, its final position is either $R_1$ or $R_3$. If the ghost was previously at $R_4$, its final position is $R_3$. \\
+\noindent 
+\textbf{Case 4--Ghost starts at $R_4$:} You first check $R_2$, to which the ghost moves to $R_3$. You then check $R_3$, to which you have caught the ghost.\\
+\noindent
+Since these four cases cover all possible scenarios of checking $R_2$ followed by $R_3$, and in total, the ghost either ends up caught or in $R_1$ or $R_3$, it is shown that such a sequence of checks results in either catching the ghost or it ending up in $R_1$ or $R_3$. \\
+\noindent 
+\textbf{b.} \\
+\noindent 
+\textbf{Case 1--Ghost is currently in $R_1$:} You first check $R_3$ to which the ghost moves to $R_2$. You then check $R_2$, to which you have caught the ghost.\\
+\noindent
+\textbf{Case 2--Ghost is currently in $R_3$:} You first check $R_3$ to which you have caught the ghost.\\
+\noindent
+Since these two cases cover all possible scenarios of the ghost starting at $R_1$ or $R_3$ and the sequence of checking $R_3$ and then $R_2$, it is shown that such a sequence of checks always results in catching the ghost. \\
+\noindent
+\textbf{c.} \fbox{$R_2 \rightarrow R_3 \rightarrow R_3 \rightarrow R_2$} \\
+\noindent 
+From part (a), the sequence $R_2 \rightarrow R_3$ results in either catching the ghost or it ending up in $R_1$ or $R_3$. In the case where it is not yet caught, we know the ghost is either in $R_1$ or $R_3$, to which the part (b) sequence $R_3 \rightarrow R_2$ guarantees that from here, the ghost always ends up caught. 
+\end{solution}
+\end{shaded}
+
+\pagebreak
+
+
+\begin{problem}
+Feedback
+\end{problem}
+
+\begin{shaded}
+\begin{solution}\\
+\noindent
+\centerline{\fbox{\textbf{Three} hours}}
+\end{solution}
+\end{shaded}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Continue with this pattern if there are more %%%%%%%
+%%%%%%%%%%%%%%%%% homework problems %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\end{document}
