@@ -1,0 +1,438 @@
+% Hello!, you can use the percent symbol in order to write a commment in LaTeX.
+% I will try my best to document my LaTeX here so you know what's going on
+
+
+% These few lines are just to set up the LaTeX document by telling it what kind of document it is, as well as what packages/libraries I want to import and use. The ones here should be sufficient, but you should still import as needed.
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[all]{xy}
+
+\usepackage{amsmath,amsthm,amssymb,color,latexsym}
+\usepackage{mathtools}
+\usepackage{geometry}        
+\geometry{letterpaper}    
+\usepackage{graphicx}
+\usepackage{tabto}
+\usepackage{setspace}
+
+\usepackage[noframe]{showframe}
+\usepackage{framed}
+
+% Sets up "environments" of formatted text.
+\renewenvironment{shaded}{%
+  \def\FrameCommand{\fboxsep=\FrameSep \colorbox{shadecolor}}%
+  \MakeFramed{\advance\hsize-\width \FrameRestore\FrameRestore}}%
+ {\endMakeFramed}
+\definecolor{shadecolor}{gray}{0.90}
+
+\newtheorem{problem}{Problem}
+
+\newenvironment{solution}[1][\it{Solution:}]{\textbf{#1 } }
+
+% Sets spacing for the document
+\onehalfspacing
+
+% All latex documents begin with a `\begin{document}`
+\begin{document}
+\begin{titlepage}
+   \begin{center}
+       \vspace*{9cm}
+
+       \textbf{CS 212 Winter 2025}
+
+       \vspace{0.5cm}
+        Homework \#3
+            
+        \vfill
+
+       \textbf{Jonathan Kong}\\
+       NetID dwa0713\\
+       Collaborators: Jonathan Kong\\             
+       Due Date: 30 Jan, 2015
+            
+   \end{center}
+\end{titlepage}
+%\noindent CS 212 Fall 2024\hfill Problem Set \# (insert number here)\\
+%Name: Kevin Fan \hfill Due 14 Mar, 2015\\ 
+%NetID: (Insert your NetID here) \\
+
+%\hrulefill
+\pagebreak
+
+\begin{problem}
+Divided Up 
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\ 
+\noindent 
+\textbf{a.} \fbox{False} \textbf{Disproof}: Consider \( a = 3, \, b = 6, \, c = 30 \). \( a \mid b \) and \( b \mid c \), but \( ab = 18 \nmid c \). \\
+\noindent 
+\textbf{b.} \fbox{True} \textbf{Proof:} Consider the contrapositive of the given statement:
+\[
+\neg (a \nmid b \lor a \nmid c) \to \neg (a \nmid bc)
+\]
+This is logically equivalent to:
+\[
+(a \mid b \land a \mid c) \to a \mid bc.
+\]
+
+Assume \(a \mid b\) and \(a \mid c\). By the definition of divisibility, there exists an integer \(k\) such that \(b = ak\), and there exists an integer \(j\) such that \(c = aj\). 
+
+Multiplying these two expressions, we get:
+\[
+bc = (ak)(aj) = a^2(kj).
+\]
+
+Since \(a\), \(k\), and \(j\) are all integers, the product \(kj\) is also an integer by closure properties. Let \(z = kj\), where \(z\) is an integer. Thus:
+\[
+bc = a(z).
+\] 
+
+Therefore, \(a \mid bc\). \\
+\noindent 
+\textbf{c.} \fbox{True} \textbf{Proof:} By the rules of divisibility, there exists an integer \(k\) such that \(b = ak\), and there exists an integer \(j\) such that \(b + c = aj\). 
+
+Subtracting the two equations, we have:
+\[
+c = (b + c) - b = aj - ak = a(j - k).
+\]
+
+Since \(j\) and \(k\) are both integers, their difference \(j - k\) is also an integer by closure properties. Let \(z = j - k\). Thus:
+\[
+c = a z.
+\]
+
+Therefore, \(a \mid c\). 
+\end{solution}
+\end{shaded}
+
+% Creates a new page
+\pagebreak
+
+
+\begin{problem}
+Oddly Divisible 
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+\textbf{Proof:} Let \(k = 2n + 1\) for some integer \(n\). Substituting \(k\) into \(k^2 - 1\), we get:
+\[
+k^2 - 1 = (2n + 1)^2 - 1 = 4n^2 + 4n.
+\]
+Thus, the proof reduces to showing that \(8 \mid 4n^2 + 4n\).
+
+Factor \(4n^2 + 4n\) as:
+\[
+4n^2 + 4n = 4 \cdot n(n + 1).
+\]
+Since \(n\) and \(n + 1\) are consecutive integers, one of them is always even. Therefore, \(n(n+1)\) is divisible by \(2\). Specifically, we can write:
+\[
+n(n+1) = 2b \quad \text{for some integer } b.
+\]
+
+Substituting \(n(n+1) = 2b\) into \(4 \cdot n(n+1)\), we get:
+\[
+4 \cdot n(n+1) = 4 \cdot 2b = 8b.
+\]
+
+To prove \(8 \mid 8b\), we need to show that there exists an integer \(z\) such that:
+\[
+8b = 8z.
+\]
+Let \(z = b\). Since \(b\) is an integer (as defined earlier when \(n(n+1) = 2b\)), \(z\) is also an integer by substitution. Thus:
+\[
+8b = 8z,
+\]
+proving that \(8 \mid 8b\).
+
+Finally, since \(4n^2 + 4n = k^2 - 1\), it follows that:
+\[
+8 \mid k^2 - 1.
+\]
+\end{solution}
+\end{shaded}
+
+
+\pagebreak
+
+
+\begin{problem}
+Properties of Mod 
+\end{problem}
+\begin{shaded}
+
+\begin{solution}
+\\
+\noindent 
+\textbf{a.} \fbox{True} \textbf{Proof:} \(a \equiv b \pmod{m}\) yields that: 
+\[
+m \mid (a - b),
+\]
+or equivalently, there exists some integer \(k \) such that:
+\[
+a - b = mk.
+\]
+
+To prove \(ac \equiv bc \pmod{mc}\), we need to show that \(mc \mid (ac - bc)\). This is equivalent to proving that there exists some integer \(j \) such that:
+\[
+ac - bc = mcj.
+\]
+
+Multiply both sides of \(a - b = mk\) by \(c\):
+\[
+(ac - bc) = mck.
+\]
+
+Since \(k \in \mathbb{Z}\), it follows that \(mck = mcj\), where \(j = k \in \mathbb{Z}\). Thus:
+\[
+mc \mid (ac - bc).
+\]
+
+By the definition of congruence, this yields: 
+\[
+ac \equiv bc \pmod{mc}.
+\]
+\noindent 
+\textbf{b.} \fbox{True} \textbf{Proof:} Prove using a biconditional proof. Specifically, we show:
+
+\[
+a \equiv b \pmod{12} \iff \left(a \equiv b \pmod{2} \land a \equiv b \pmod{6}\right)
+\]
+
+\textbf{First Direction:} (\(a \equiv b \pmod{12} \rightarrow a \equiv b \pmod{2} \text{ and } a \equiv b \pmod{6}\))
+
+Assume \(a \equiv b \pmod{12}\). By the definition of congruence, this means:
+\[
+12 \mid (a - b),
+\]
+so there exists some integer $k$ such that:
+\[
+a - b = 12k.
+\]
+
+Since \(12 = 2 \cdot 6\), we can write:
+\[
+a - b = 2(6k),
+\]
+which shows that \(2 \mid (a - b)\), so \(a \equiv b \pmod{2}\).
+
+Similarly, we can write:
+\[
+a - b = 6(2k),
+\]
+which shows that \(6 \mid (a - b)\), so \(a \equiv b \pmod{6}\).
+
+Thus, \(a \equiv b \pmod{12} \rightarrow a \equiv b \pmod{2} \text{ and } a \equiv b \pmod{6}\).
+
+\textbf{Second Direction:} (\(a \equiv b \pmod{2} \text{ and } a \equiv b \pmod{6} \implies a \equiv b \pmod{12}\))
+
+Assume \(a \equiv b \pmod{2}\) and \(a \equiv b \pmod{6}\). By the definition of congruence, this means:
+\[
+2 \mid (a - b) \quad \text{and} \quad 6 \mid (a - b),
+\]
+so there exist integers $k$ and $j$ such that:
+\[
+a - b = 2k \quad \text{and} \quad a - b = 6j.
+\]
+
+Thus, \(a - b\) is a common multiple of \(2\) and \(6\). The least common multiple of \(2\) and \(6\) is \(12\), so \(a - b\) must be divisible by \(12\). Therefore, there exists some integer $z$ such that:
+\[
+a - b = 12z.
+\]
+
+This shows that \(12 \mid (a - b)\), which implies:
+\[
+a \equiv b \pmod{12}.
+\]
+
+Both directions have been proven, so:
+\[
+a \equiv b \pmod{12} \iff \left(a \equiv b \pmod{2} \text{ and } a \equiv b \pmod{6}\right).
+\]
+
+\end{solution}
+\end{shaded}
+
+
+\pagebreak
+
+
+\begin{problem}
+Mod Madness 
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+Prove using a biconditional proof. Specifically, we show:
+\[
+n \text{ is even} \iff n^2 \equiv 0 \pmod{4}.
+\]
+
+\textbf{First Direction:} (\(n \text{ is even} \rightarrow n^2 \equiv 0 \pmod{4}\))
+
+Assume \(n\) is even. Then, by definition, there exists some integer $k$ such that:
+\[
+n = 2k.
+\]
+Squaring both sides gives:
+\[
+n^2 = (2k)^2 = 4k^2.
+\]
+Since $k^2$ is an integer, there exists some integer $j$ such that \(n^2=4j\)\
+This shows \(4 \mid n^2\), which implies:
+\[
+n^2 \equiv 0 \pmod{4}.
+\]
+
+\textbf{Second Direction:} (\(n^2 \equiv 0 \pmod{4} \rightarrow n \text{ is even}\))
+
+Assume \(n^2 \equiv 0 \pmod{4}\). By the definition of congruence, this means:
+\[
+4 \mid n^2,
+\]
+so there exists some integer $k$ such that:
+\[
+n^2 = 4k.
+\]
+Rewriting, we have:
+\[
+n \cdot n = 2 \cdot 2k .
+\]
+Here, \(n\) must contribute a factor of 2 towards the \(4k\) product as \(n\) times itself gets the \(2 \cdot 2k\). Therefore, \(n = 2j\) for some integer $j$, which implies \(n\) is even.
+
+Both directions have been proven, so:
+\[
+n \text{ is even} \iff n^2 \equiv 0 \pmod{4}.
+\]
+
+\end{solution}
+\end{shaded}
+
+\pagebreak
+
+
+\begin{problem}
+Goldbach's Conjecture
+\end{problem}
+
+\begin{shaded}
+\begin{solution}
+\\
+\noindent 
+\textbf{Proof:}  
+We aim to prove that every odd integer \(n > 7\) can be expressed as the sum of three odd prime numbers, assuming Goldbach's Conjecture.
+
+Let \(n\) be an odd integer greater than \(7\). We can write:
+\[
+n = 5 + (n - 5),
+\]
+where \(5\) is an odd prime and \(n - 5\) is even (since \(n\) and 5 are odd, $n-5$ must be even as the sum of two odd numbers is even). Since \(n > 7\), \(n - 5 > 2\), and Goldbach's Conjecture applies to the even number \(n - 5\). By Goldbach's Conjecture, we can write:
+\[
+n - 5 = p_1 + p_2,
+\]
+where \(p_1\) and \(p_2\) are primes (not necessarily distinct). Substituting back, we have:
+\[
+n = 5 + p_1 + p_2.
+\]
+
+Now, we consider the cases for \(p_1\):
+
+\textbf{Case 1:} $p_1$ is even. The only prime even is 2 so $p_1$ must be 2. Similarly, since $n-5=2+p_2$, $p_2$ must be even since the difference of two even numbers is even. Therefore, $p_2$ is also 2. Substituting, we get:
+\[
+n = 5 + 2 + 2 = 9.
+\]
+For \(n = 9\), we verify that it can still be expressed as the sum of three odd primes:
+\[
+9 = 3 + 3 + 3.
+\]
+Thus, this special case holds.
+
+\textbf{Case 2:} \(p_1\) is odd.  
+If \(p_1\) is odd, then \(p_2 = n - 5 - p_1\) must also be odd, since \(n - 5 \) is even and the difference between an even integer and an odd integer is odd. Thus, both \(p_1\) and \(p_2\) are odd primes. Adding \(5\) (which is also an odd prime), we have:
+\[
+n = 5 + p_1 + p_2,
+\]
+expressed as the sum of three odd primes.
+
+In both cases:
+\begin{enumerate}
+    \item If \(p_1 = 2\) and \(p_2 = 2\), we verify \(n = 9\) works as \(9 = 3 + 3 + 3\).
+    \item If \(p_1\) and \(p_2\) are odd primes, \(n = 5 + p_1 + p_2\) is the sum of three odd primes.
+\end{enumerate}
+Thus, every odd integer \(n > 7\) can be expressed as the sum of three odd prime numbers. 
+
+\end{solution}
+\end{shaded}
+
+\pagebreak
+
+\begin{problem}
+Bonus: Pythagorean Triples 
+\end{problem}
+
+\begin{shaded}
+\begin{solution}\\
+\noindent
+Consider the contrapositive of the given statement: 
+\[
+\text{If } a^2 + b^2 = c^2, \text{ then } a \text{ or } b \text{ is even}.
+\]
+
+This is logically equivalent to:  
+\[
+\text{If } a \text{ is odd and } b \text{ is odd, then } a^2 + b^2 \neq c^2.
+\]
+Assume \(a\) and \(b\) are both odd. Then we can write:
+\[
+a = 2k + 1 \quad \text{and} \quad b = 2j + 1,
+\]
+for some integer \(k\) and integer \(j\). Plugging these into \(a^2 + b^2\), we get:
+\[
+a^2 + b^2 = 2(2k^2 + 2k + 2j^2 + 2j + 1).
+\]
+Since \(k\) and \(j\) are integers, by closure properties of integers, \(2k^2 + 2k + 2j^2 + 2j + 1\) is an integer. Let:
+\[
+z = 2k^2 + 2k + 2j^2 + 2j + 1,
+\]
+so:
+\[
+a^2 + b^2 = 2(2z + 1).
+\]
+
+The expression \(2(2z + 1)\) is the product of an even integer \(2\) and an odd integer \((2z + 1)\). This product cannot be expressed as the square of any integer, because a square must either be the product of two even integers or two odd integers. Therefore:
+\[
+a^2 + b^2 \neq c^2.
+\]
+
+This proves the contrapositive and thus establishes the original statement:  
+\[
+\text{If } a^2 + b^2 = c^2, \text{ then } a \text{ or } b \text{ is even}.
+\]
+\end{solution}
+\end{shaded}
+
+\pagebreak
+\begin{problem}
+Feedback
+\end{problem}
+
+\begin{shaded}
+\begin{solution}\\
+\noindent
+\centerline{\fbox{\textbf{Three} hours + \textbf{25} minutes for the bonus problem}}
+\end{solution}
+\end{shaded}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Continue with this pattern if there are more %%%%%%%
+%%%%%%%%%%%%%%%%% homework problems %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\end{document}
